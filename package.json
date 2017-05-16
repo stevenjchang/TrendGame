@@ -7,7 +7,7 @@
     "dev": "webpack -d --watch",
     "build": "webpack -p",
     "test": "mocha './tests/*.spec.js'",
-    "start": "webpack -p && node server.js",
+    "start": "webpack -p && nodemon server.js",
     "start:watch": "nodemon server.js"
   },
   "repository": {
@@ -45,6 +45,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-google-charts": "^1.5.4-alpha.1",
+    "react-router": "^4.1.1",
     "sinon": "^2.1.0",
     "supertest": "^3.0.0",
     "webpack": "^2.5.0"
