@@ -1,7 +1,5 @@
 //set up the database if not exist
 // This file should be run once from the command line to initialize the db schema.  Be sure to edit the url const with the target url.
-var myConnection = require('./dbLocalConnection');
-
 const pg = require('pg');
 
 const url = '<INSERT DB URL HERE FOR SCHEMA UPLOAD>' + '?ssl=true';
