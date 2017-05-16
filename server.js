@@ -1,3 +1,4 @@
+require('dotenv').config();
 const makeTimeline = require('./utilities/makeTimeline');
 const queries = require('./db/queries');
 const cleanData = require('./utilities/cleanSearch');

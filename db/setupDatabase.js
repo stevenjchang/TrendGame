@@ -2,11 +2,11 @@
 // This file should be run once from the command line to initialize the db schema.  Be sure to edit the url const with the target url.
 const pg = require('pg');
 
-const url = '<INSERT DB URL HERE FOR SCHEMA UPLOAD>';
+const url = require('./dbLocalConnection.js');
 
 var db = require('knex')({
   client: 'pg',
-  connection: url + '?ssl=true'
+  connection: url
 });
 
 db.schema.hasTable('trends').then(function (exists) {

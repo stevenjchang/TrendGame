@@ -5,3 +5,5 @@ aylienApiKeys.js
 .eslintrc.json
 .vscode
 dbLocalConnection.js
+data
+.env

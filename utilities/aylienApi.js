@@ -15,26 +15,12 @@ const getStories = (queryString, peaks, scope, callback) => {
   // Establish API instance and supply credentials
   const apiInstance = new AylienNewsApi.DefaultApi();
 
-  let apiInfo;
-  try {
-    apiInfo = require('../lib/env/aylienApiKeys');
-  } catch (e) {
-    apiInfo = {};
-  }
-
   let appId = apiInstance.apiClient.authentications['app_id'];
-  if (process.env.AYLIEN_ID) {
-    appId.apiKey = process.env.AYLIEN_ID;
-  } else {
-    appId.apiKey = apiInfo.id;
-  }
-
+  appId.apiKey = process.env.AYLIEN_ID;
+ 
   let appKey = apiInstance.apiClient.authentications['app_key'];
-  if (process.env.AYLIEN_KEY) {
-    appKey.apiKey = process.env.AYLIEN_KEY;
-  } else {
-    appKey.apiKey = apiInfo.key;
-  }
+  appKey.apiKey = process.env.AYLIEN_KEY;
+
 
   // Assign options for API query
   let opts = {
