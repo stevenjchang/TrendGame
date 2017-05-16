@@ -9,8 +9,8 @@ const morgan = require('morgan');
 var worker = require('./workers/worker');
 
 const app = express();
-const IP = '127.0.0.1';
-const PORT = process.env.PORT || 8080;
+const IP = process.env.HOST;
+const PORT = process.env.PORT;
 
 app.use(express.static(__dirname + '/client/public'));
 app.use(bodyParser.json());

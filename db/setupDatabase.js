@@ -2,8 +2,6 @@
 // This file should be run once from the command line to initialize the db schema.  Be sure to edit the url const with the target url.
 const pg = require('pg');
 
-const url = require('./dbLocalConnection.js');
-
 var db = require('knex')({
   client: 'pg',
   connection: {
@@ -15,7 +13,7 @@ var db = require('knex')({
 });
 
 db.schema.hasTable('trends').then(function (exists) {
-  if (!exists) {
+  if (!exists) 
     db.schema.createTable('trends', function (trend) {
       trend.increments('id').primary();
       trend.string('name');
