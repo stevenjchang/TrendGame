@@ -6,22 +6,26 @@ const url = '<INSERT DB URL HERE FOR SCHEMA UPLOAD>' + '?ssl=true';
 
 var db = require('knex')({
   client: 'pg',
-  connection: url
+  connection: {
+    host: 'localhost',
+    user: 'yujin',
+    password: '',
+    database: 'trendgame'
+  }
 });
 
-db.schema.hasTable('user').then( (exists) => {
+db.schema.hasTable('users').then(exists => {
   if (!exists) {
-    db.schema.createTable('users', (trend) => {
+    db.schema.createTable('users', (user) => {
       user.increments('id').primary();
-      user.string('email');
-      user.string('password');
+      user.string('name');
       user.string('googleID');
     })
     .then((table) => {
-      console.log('Created user table');
+      console.log('Created users table');
     })
   }
-})
+});
 
 db.schema.hasTable('trends').then(function (exists) {
   if (!exists) {
