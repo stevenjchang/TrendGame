@@ -9,6 +9,20 @@ var db = require('knex')({
   connection: url
 });
 
+db.schema.hasTable('user').then( (exists) => {
+  if (!exists) {
+    db.schema.createTable('users', (trend) => {
+      user.increments('id').primary();
+      user.string('email');
+      user.string('password');
+      user.string('googleID');
+    })
+    .then((table) => {
+      console.log('Created user table');
+    })
+  }
+})
+
 db.schema.hasTable('trends').then(function (exists) {
   if (!exists) {
     db.schema.createTable('trends', function (trend) {
@@ -20,6 +34,7 @@ db.schema.hasTable('trends').then(function (exists) {
     });
   }
 });
+
 db.schema.hasTable('weeks').then(function (exists) {
   if (!exists) {
     db.schema.createTable('weeks', function (week) {
@@ -33,6 +48,7 @@ db.schema.hasTable('weeks').then(function (exists) {
     });
   }
 });
+
 db.schema.hasTable('stories').then(function (exists) {
   if (!exists) {
     db.schema.createTable('stories', function (story) {
@@ -48,3 +64,5 @@ db.schema.hasTable('stories').then(function (exists) {
     });
   }
 });
+
+//create favorites table 
