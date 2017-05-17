@@ -20,12 +20,25 @@ db.schema.hasTable('users').then(exists => {
       user.increments('id').primary();
       user.string('name');
       user.string('googleID');
+      //reference search query id 
     })
     .then((table) => {
       console.log('Created users table');
     })
   }
 });
+
+db.schema.hasTable('queries').then(exists => {
+  if (!exists) {
+    db.schema.createTable('queries', (query) => {
+      query.increments('id').primary();
+      query.string('query');
+      query.integer('user_id').references('id').inTable('users');
+    })
+  }
+})
+
+
 
 db.schema.hasTable('trends').then(function (exists) {
   if (!exists) {
