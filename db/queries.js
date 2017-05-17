@@ -1,6 +1,16 @@
 var db = require('./config');
 const findUnique = require('../utilities/findUnique');
 
+
+const addUser = (googleID, callback) => {
+  db('users').insert({googleID: googleID})
+    .then(response => {
+      callback(null, response);
+    })
+    .catch(error => {
+      callback(error, null);
+    });
+}
 const insertSearch = (searchString, callback) => {
   db('trends').insert({name: searchString}).then((resp) => {
     callback(null, resp);
@@ -22,5 +32,10 @@ const getSearches = (numberOfSearches, callback) => {
   });
 };
 
+// get User's saved trends
+
+// save User's favorited trends
+
 module.exports.insertSearch = insertSearch;
 module.exports.getSearches = getSearches;
+module.exports.addUser = addUser;
