@@ -16,6 +16,10 @@ var config = {
         test: /\.jsx?/,
         include: APP_DIR,
         loader: 'babel-loader'
+      }, {
+        test: /\.css$/,
+				loader: "style-loader!css-loader?module=true&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]",
+				exclude: /semantic/
       }
     ]
   },

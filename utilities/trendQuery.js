@@ -6,6 +6,7 @@ module.exports = (keyword, callback) => {
   const options = {
     keyword: keyword,
     startTime: backDateByMonths(15),
+    endTime: new Date()
   };
 
   googleTrends.interestOverTime(options)
@@ -16,3 +17,5 @@ module.exports = (keyword, callback) => {
       callback(err, null);
     });
 };
+
+
