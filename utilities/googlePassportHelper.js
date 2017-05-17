@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const queries = require('../db/queries');
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -8,8 +9,16 @@ passport.use(new GoogleStrategy({
   },
   (accessToken, refreshToken, profile, cb) => {
     console.log('Logging profile info from PassportHelper', profile);
-    //User.findOrCreate({ googleID: profile.id})
-    cb(null, profile);
+    process.nextTick( () => {
+      queries.addUser(profile.id, (err, results) => {
+        if (err) {
+          cb(err, null);
+        }
+        else {
+          cb(null, profile);
+        }
+      })
+    })
   }
 ));
 
@@ -18,7 +27,7 @@ passport.serializeUser( (user, done) => {
 });
 
 passport.deserializeUser( (id, done) => {
-  //User.findById(id, (err, user) => { done(err, user); })
+  // User.findById(id, (err, user) => { done(err, user); })
   done(user.id, null);
 })
 
