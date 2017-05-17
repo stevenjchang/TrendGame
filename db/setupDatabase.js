@@ -2,18 +2,15 @@
 // This file should be run once from the command line to initialize the db schema.  Be sure to edit the url const with the target url.
 const pg = require('pg');
 
+const url = '<INSERT DB URL HERE FOR SCHEMA UPLOAD>' + '?ssl=true';
+
 var db = require('knex')({
   client: 'pg',
-  connection: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-  }
+  connection: url
 });
 
 db.schema.hasTable('trends').then(function (exists) {
-  if (!exists) 
+  if (!exists) {
     db.schema.createTable('trends', function (trend) {
       trend.increments('id').primary();
       trend.string('name');
