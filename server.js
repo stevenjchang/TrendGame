@@ -13,8 +13,12 @@ const app = express();
 const IP = process.env.HOST;
 const PORT = process.env.PORT;
 
+const passport = require('./utilities/googlePassportHelper.js');
+
 app.use(express.static(__dirname + '/client/public'));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(morgan('tiny'));
 worker.worker(`http://${IP}:${PORT}/api/worker`);
 
@@ -29,6 +33,22 @@ app.get('/api', (req, res) => {
     version: '0.0.1'
   });
 });
+
+// signup or login
+
+app.get('/auth/google', 
+  passport.authenticate('google', {
+    scope: ['https://www.googleapis.com/auth/plus.login']
+    // successRedirect: '/', 
+    // failureRedirect: 'http://www.google.com'
+}));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google'),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 app.get('/api/timeline', (req, res) => {
   let trend = req.query.q;
