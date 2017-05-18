@@ -9,9 +9,11 @@ class TrendChart extends React.Component {
       {
         eventName: 'select',
         callback: (Chart) => {
-          
-            // Returns Chart so you can access props and  the ChartWrapper object from chart.wrapper
-          console.log('Selected ', this.props.chartData.data[Chart.chart.getSelection()[0].row + 1][0]);
+          const selectedPoint = Chart.chart.getSelection()[0]
+            // Returns Chart so you can access props
+          if(selectedPoint) {
+            this.handleChartClick(this.props.chartData.data[selectedPoint.row + 1][0]);
+          }
         },
       }
     ];
@@ -50,6 +52,10 @@ const TrendChart = ({ chartData, storyPoint }) => {
       </span>
     );
 >>>>>>> Add date picking / trend zoom
+  }
+
+  handleChartClick(dateClicked){
+    console.log(dateClicked);
   }
 
   render() {
