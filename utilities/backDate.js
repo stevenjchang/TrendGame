@@ -4,3 +4,4 @@ module.exports = (months) => {
   date.setMonth(date.getMonth() - months);
   return date;
 };
+

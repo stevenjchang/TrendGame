@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
 
+
 class TrendChart extends React.Component {
   constructor(props) {
     super(props)

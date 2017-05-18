@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import axios from 'axios';
 import Layout from './components/Layout';
+import formatQuery from './../../utilities/formatQuery.js'
 var Loader = require('halogen/PulseLoader');
 
 class App extends React.Component {
@@ -17,21 +18,28 @@ class App extends React.Component {
       history: []
     };
     this.collectData = this.collectData.bind(this);
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleEndDateChange = this.handleEndDateChange.bind(this);
   }
 
   componentDidMount() {
     this.getSearchHistory();
   }
 
-  collectData(trend) {
+  collectData(trend, startTime, endTime) {
     this.setState({
       loader: <div className="text-center"><Loader color="#dc3c3c" size="16px" margin="4px"/></div>,
       storyPoint: {}
     });
     axios.get('/api/timeline', {
-      params: { q: trend }
+      params: { 
+       q: trend,
+       start: startTime,
+       end: endTime
+      }
     })
     .then(response => {
+
       if (response.data.timeline === null) {
         this.setState({
           loader: <div className="text-center"><h6>Sorry, try a less obscure trend.</h6></div>
@@ -94,9 +102,23 @@ class App extends React.Component {
     });
   }
 
+  handleStartDateChange(date) {
+    this.setState({
+      start: date
+    });
+  }
+
+  handleEndDateChange(date) {
+    this.setState({
+      end: date
+    });
+  }
+
   render () {
     return (
       <Layout
+        addStart={this.handleStartDateChange}
+        addEnd={this.handleEndDateChange}
         chartData={this.state}
         collectData={this.collectData}
         storyPoint={this.state.storyPoint}
