@@ -20,6 +20,7 @@ class App extends React.Component {
     this.collectData = this.collectData.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
+    this.handleChartClick = this.handleChartClick.bind(this);
   }
 
   componentDidMount() {
@@ -114,6 +115,19 @@ class App extends React.Component {
     });
   }
 
+  handleChartClick(date) {
+    let trend = this.state.trend;
+    axios.get('/api/articles', {
+      params: {
+        trend: trend,
+        date: date
+      }
+    })
+    .then(response => {
+      console.log(response);
+    })
+  }
+
   render () {
     return (
       <Layout
@@ -123,6 +137,7 @@ class App extends React.Component {
         collectData={this.collectData}
         storyPoint={this.state.storyPoint}
         history={this.state.history}
+        getChartClick={this.handleChartClick}
       />
     );
   }
