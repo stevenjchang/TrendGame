@@ -58,7 +58,6 @@ app.get('/api/timeline', (req, res) => {
 app.get('/api/articles', (req, res) => {
   let trend = req.query.trend;
   let date = req.query.date;
-  console.log(trend, date)
 
   trend = cleanData.prepForAylien(trend);
 
@@ -66,9 +65,9 @@ app.get('/api/articles', (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(data[0]);
+      res.status(200).send(data);
     }
-  });s
+  });
 })
 
 app.post('/api/history', (req, res) => {
