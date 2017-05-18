@@ -4,15 +4,6 @@ import axios from 'axios';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './components/App.jsx';
 
-<<<<<<< HEAD
-render(
-  <Router>
-  <App/>
-  </Router>
-  
-  , document.getElementById('app')
-);
-=======
 class BoltOnRouter extends React.Component {
   constructor(props) {
     super(props)
@@ -30,4 +21,3 @@ class BoltOnRouter extends React.Component {
     
 render(<BoltOnRouter />, document.getElementById('app'));
 
->>>>>>> Implement BoldOnRouter
