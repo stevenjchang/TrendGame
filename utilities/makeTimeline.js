@@ -1,6 +1,6 @@
 const queryTrend = require('./trendQuery.js');
 const findPeaks = require('./peakAlgo.js');
-const getNews = require('./aylienApi');
+const aylienApi = require('./aylienApi.js');
 const makeFinalData = require('./stitchData');
 
 const makeTimeline = (trend, startTime, endTime, callback) => {
@@ -11,12 +11,13 @@ const makeTimeline = (trend, startTime, endTime, callback) => {
 
     } else {
       const peaks = findPeaks(timeSeries);
-      getNews(trend, peaks, 'title', (err, peakStories) => {
+      console.log("THE PEAKS", peaks);
+      aylienApi.getNews(trend, peaks, 'title', (err, peakStories) => {
         if (err) {
           callback(err, null);
 
         } else if (peakStories[0].stories[0] === undefined) {
-          getNews(trend, peaks, 'body', (err, peakStories) => {
+          aylienApi.getNews(trend, peaks, 'body', (err, peakStories) => {
 
             if (err) {
               callback(err, null);
