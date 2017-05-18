@@ -3,6 +3,7 @@ import Article from './Article.jsx';
 
 const ArticleList = ({ trend, storyPoint }) => {
   let articles;
+  console.log("story point: ", storyPoint);
 
   if (storyPoint.hasOwnProperty('stories') && storyPoint.stories.length === 0) {
     articles = (
