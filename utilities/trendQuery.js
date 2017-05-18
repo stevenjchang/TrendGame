@@ -13,6 +13,7 @@ module.exports = (trend, startTime, endTime, callback) => {
   // };
 
   // google trends down!!
+
   // googleTrends.interestOverTime(options)
   //   .then(results => {
   //     callback(null, sanitizeTrend(results));
@@ -37,6 +38,5 @@ module.exports = (trend, startTime, endTime, callback) => {
       console.log('you got and error from scotts app: ', error)
       callback(error, null);
     })
+
 };
-
-
