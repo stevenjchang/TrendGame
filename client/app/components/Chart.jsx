@@ -55,7 +55,7 @@ const TrendChart = ({ chartData, storyPoint }) => {
   }
 
   handleChartClick(dateClicked){
-    console.log(dateClicked);
+    this.props.getChartClick(dateClicked);
   }
 
   render() {
