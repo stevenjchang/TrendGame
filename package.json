@@ -5,9 +5,9 @@
   "main": "user-login.js",
   "scripts": {
     "dev": "webpack -d --watch",
-    "build": "webpack -p",
+    "build": "webpack",
     "test": "mocha './tests/*.spec.js'",
-    "start": "webpack -p && node server.js",
+    "start": "webpack && node server.js",
     "start:watch": "nodemon server.js"
   },
   "repository": {

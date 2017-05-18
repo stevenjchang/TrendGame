@@ -69,13 +69,13 @@ export default class Input extends React.Component {
             </div>
           </form>
           <div>
-            startTime
+            startTime  
             <DatePicker 
               className="form-control search-input"
               selected={this.state.startTime}
               onChange={this.handleStartDateChange}
             />
-            endTime
+            endTime  
             <DatePicker 
               className="form-control search-input"
               selected={this.state.endTime}
