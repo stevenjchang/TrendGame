@@ -124,7 +124,10 @@ class App extends React.Component {
       }
     })
     .then(response => {
-      console.log(response);
+      var newStoryPoint = JSON.parse(JSON.stringify(this.state.storyPoint));
+      console.log("state storypoint:", newStoryPoint);
+      newStoryPoint.stories = response.data[0].stories;
+      this.setState({'storyPoint': newStoryPoint});
     })
   }
 
