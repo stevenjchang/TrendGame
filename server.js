@@ -4,7 +4,11 @@ const queries = require('./db/queries');
 const cleanData = require('./utilities/cleanSearch');
 const makeArticles = require('./utilities/makeArticles.js');
 
+const passport = require('./utilities/googlePassportHelper.js');
 const express = require('express');
+const session = require('express-session');
+const Cookies = require('universal-cookie');
+const request = require('request');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 var worker = require('./workers/worker');
@@ -13,12 +17,21 @@ const app = express();
 const IP = process.env.HOST;
 const PORT = process.env.PORT;
 
-const passport = require('./utilities/googlePassportHelper.js');
+
 
 app.use(express.static(__dirname + '/client/public'));
 app.use(bodyParser.json());
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  saveUninitialized: true,
+  resave: true,
+  name: 'trendzilla'
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(morgan('tiny'));
 worker.worker(`http://${IP}:${PORT}/api/worker`);
 
@@ -34,21 +47,48 @@ app.get('/api', (req, res) => {
   });
 });
 
-// signup or login
 
+app.get('/', (req, res, next) => {
+  // if (req.isAuthenticated()) {
+    if (req.session.user) {
+    res.cookie('loggedIn', true);
+    console.log('req session user!!!!!!!!!!!!!!!!!!!!!!!:', req.session)
+  }
+   res.sendFile(__dirname + '/client/public/_index.html')
+});
+
+
+// signup or login
 app.get('/auth/google', 
   passport.authenticate('google', {
     scope: ['https://www.googleapis.com/auth/plus.login']
-    // successRedirect: '/', 
-    // failureRedirect: 'http://www.google.com'
-}));
+  }
+));
+
 
 app.get('/auth/google/callback', 
-  passport.authenticate('google'),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
+  passport.authenticate('google', {
+    failureRedirect: '/' }),
+      (req, res) => {
+        console.log('USER FROM CALLBACK:', req.user)
+        req.session.user = req.user;
+        res.redirect('/');
   });
+
+  app.get('/logout', (req, res) => {
+    console.log('req session user from logout endpoint', req.session.user)
+    // res.send('/logout')
+    req.session.destroy(err => {
+      res.clearCookie('loggedIn');
+      res.redirect('/');
+      if (err) {
+        console.log('logout error!!!!!!!!!!!----:', err);
+        res.send(err);
+      }
+    })
+  });
+
+
 
 app.get('/api/timeline', (req, res) => {
   let trend = req.query.q;
@@ -88,11 +128,12 @@ app.get('/api/articles', (req, res) => {
 })
 
 app.post('/api/history', (req, res) => {
+  console.log('API/HISTORY POST REQUEST:', req.body.search);
+  console.log('API/HISTORY POST REQUEST USER ID:', req.user.id);
   let trend = req.body.search;
-
+  let user = req.user.id;
   if (cleanData.checkIsReadyForDb(trend)) {
     trend = cleanData.prepForDb(trend);
-
     queries.insertSearch(trend, (err, resp) => {
       if (err) {
         res.status(500).send(err);
@@ -123,4 +164,5 @@ app.use((req, res) => {
   res.status(404);
   res.sendFile(__dirname + '/client/public/404.html');
 });
+
 module.exports = app;
