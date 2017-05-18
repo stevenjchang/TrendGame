@@ -21,7 +21,7 @@ class TrendChart extends React.Component {
   }
 
   handleChartClick(dateClicked){
-    console.log(dateClicked);
+    this.props.getChartClick(dateClicked);
   }
 
   render() {
