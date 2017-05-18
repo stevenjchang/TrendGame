@@ -1,4 +1,5 @@
 import React from 'react';
+import GoogleSignIn from './GoogleSignIn';
 import TrendChart from './Chart';
 import Input from './Input';
 import History from './History';
@@ -16,6 +17,8 @@ const Body = ({ selectedDate, collectData, history, chartData, storyPoint, addSt
           setTrend={setTrend}
           trend={trend}
         />
+        <GoogleSignIn />
+        <Input collectData={collectData}/>
         <History history={history} collectData={collectData}/>
         <TrendChart getChartClick={getChartClick} chartData={chartData} storyPoint={storyPoint}/>
         <ArticleList selectedDate={selectedDate} trend={chartData.trend} storyPoint={storyPoint}/>
