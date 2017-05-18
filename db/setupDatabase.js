@@ -20,7 +20,7 @@ db.schema.hasTable('users').then(exists => {
       user.increments('id').primary();
       user.string('name');
       user.string('googleID');
-      //reference search query id 
+      user.string('token');
     })
     .then((table) => {
       console.log('Created users table');
@@ -28,24 +28,13 @@ db.schema.hasTable('users').then(exists => {
   }
 });
 
-db.schema.hasTable('queries').then(exists => {
-  if (!exists) {
-    db.schema.createTable('queries', (query) => {
-      query.increments('id').primary();
-      query.string('query');
-      query.integer('user_id').references('id').inTable('users');
-    })
-  }
-})
-
-
-
 db.schema.hasTable('trends').then(function (exists) {
   if (!exists) {
     db.schema.createTable('trends', function (trend) {
       trend.increments('id').primary();
       trend.string('name');
       trend.timestamps(true, true);
+      trend.integer('userID').references('id').inTable('users');
     }).then(function (table) {
       console.log('Created Table trends');
     });

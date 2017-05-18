@@ -12,16 +12,30 @@ const findUnique = require('../utilities/findUnique');
 //     });
 // }
 
+const findUser = (googleID, callback) => {
+  console.log('GOOGLEID FROM FINDUSER QUERY', googleID)
+  db('users').where('googleID', googleID)
+    .then(response => {
+      console.log('FIND USER QUERY RESPONSE:', response)
+      callback(null, response);
+    })
+    .catch(error => {
+      callback(error);
+    })
+}
 
-const addUser = (googleID, callback) => {
-  db('users').insert({googleID: googleID})
+const addUser = (name, googleID, token, callback) => {
+  db('users').insert({name: name, googleID: googleID, token: token})
     .then(response => {
       callback(null, response);
     })
     .catch(error => {
-      callback(error, null);
+      console.error('error from addUser:', error)
+      callback(error);
     });
 }
+
+
 
 
 const insertSearch = (searchString, callback) => {
@@ -51,4 +65,5 @@ const getSearches = (numberOfSearches, callback) => {
 
 module.exports.insertSearch = insertSearch;
 module.exports.getSearches = getSearches;
+module.exports.findUser = findUser;
 module.exports.addUser = addUser;
