@@ -2,6 +2,7 @@ require('dotenv').config();
 const makeTimeline = require('./utilities/makeTimeline');
 const queries = require('./db/queries');
 const cleanData = require('./utilities/cleanSearch');
+const makeArticles = require('./utilities/makeArticles.js');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -53,6 +54,22 @@ app.get('/api/timeline', (req, res) => {
   //   }
   // });
 });
+
+app.get('/api/articles', (req, res) => {
+  let trend = req.query.trend;
+  let date = req.query.date;
+  console.log(trend, date)
+
+  trend = cleanData.prepForAylien(trend);
+
+  makeArticles(trend, date, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data[0]);
+    }
+  });s
+})
 
 app.post('/api/history', (req, res) => {
   let trend = req.body.search;
