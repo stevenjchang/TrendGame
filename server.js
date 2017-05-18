@@ -31,9 +31,19 @@ app.get('/api', (req, res) => {
 
 app.get('/api/timeline', (req, res) => {
   let trend = req.query.q;
+  let startTime;
+  let endTime;
+
+  if (req.query.start) {
+    startTime = JSON.parse(req.query.start);
+  }
+  if (req.query.end) {
+    endTime = JSON.parse(req.query.end);
+  }
+
   trend = cleanData.prepForAylien(trend);
 
-  makeTimeline(trend, (err, data) => {
+  makeTimeline(trend, startTime, endTime, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {

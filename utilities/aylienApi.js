@@ -15,6 +15,8 @@ const getStories = (queryString, peaks, scope, callback) => {
   // Establish API instance and supply credentials
   const apiInstance = new AylienNewsApi.DefaultApi();
 
+  console.log('WARNING!')
+
   let appId = apiInstance.apiClient.authentications['app_id'];
   appId.apiKey = process.env.AYLIEN_ID;
  
@@ -35,6 +37,7 @@ const getStories = (queryString, peaks, scope, callback) => {
 
   apiInstance.listStories(opts, (error, data, response) => {
     if (error) {
+      console.log('ERROR: ', error)
       callback(error, null);
     } else {
       const formattedStories = formatStories(data);

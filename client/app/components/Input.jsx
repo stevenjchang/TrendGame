@@ -31,18 +31,20 @@ export default class Input extends React.Component {
   handleStartDateChange(date) {
     this.setState({
       startTime: date
+    }, () => {
+      this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
     });
   }
 
   handleEndDateChange(date) {
     this.setState({
       endTime: date
+    }, () => {
+      this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
     });
   }
 
   render () {
-      console.log(this.state.startTime)
-      console.log(this.state.endTime)
     return (
       <div className="row mb-4">
         <div className="col">
