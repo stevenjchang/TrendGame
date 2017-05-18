@@ -4,6 +4,7 @@ import { Chart } from 'react-google-charts';
 const TrendChart = ({ chartData, storyPoint }) => {
   let displayChart;
   let { data, trend, start, end, loader } = chartData;
+  console.log('This is the end: ', end);
   if (data.length === 0 || loader !== false) {
     displayChart = loader;
   } else {
