@@ -1,11 +1,10 @@
 import React from 'react';
 import {render} from 'react-dom';
 import axios from 'axios';
-import Layout from './components/Layout';
-import formatQuery from './../../utilities/formatQuery.js';
-import { HashHistory as Router, Route } from 'react-router-dom';
-import App from './components/App';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import App from './components/App.jsx';
 
+<<<<<<< HEAD
 render(
   <Router>
   <App/>
@@ -13,3 +12,22 @@ render(
   
   , document.getElementById('app')
 );
+=======
+class BoltOnRouter extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route path='/:searchterm' component={App} />
+        </Switch>
+      </Router>
+    )
+  }
+}
+    
+render(<BoltOnRouter />, document.getElementById('app'));
+
+>>>>>>> Implement BoldOnRouter
