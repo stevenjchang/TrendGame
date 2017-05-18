@@ -49,12 +49,10 @@ app.get('/api', (req, res) => {
 
 
 app.get('/', (req, res, next) => {
-  // if (req.isAuthenticated()) {
-    if (req.session.user) {
+  if (req.session.user) {
     res.cookie('loggedIn', true);
-    console.log('req session user!!!!!!!!!!!!!!!!!!!!!!!:', req.session)
   }
-   res.sendFile(__dirname + '/client/public/_index.html')
+  res.sendFile(__dirname + '/client/public/_index.html')
 });
 
 
@@ -64,7 +62,6 @@ app.get('/auth/google',
     scope: ['https://www.googleapis.com/auth/plus.login']
   }
 ));
-
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', {
@@ -76,13 +73,10 @@ app.get('/auth/google/callback',
   });
 
   app.get('/logout', (req, res) => {
-    console.log('req session user from logout endpoint', req.session.user)
-    // res.send('/logout')
     req.session.destroy(err => {
       res.clearCookie('loggedIn');
       res.redirect('/');
       if (err) {
-        console.log('logout error!!!!!!!!!!!----:', err);
         res.send(err);
       }
     })
@@ -128,13 +122,11 @@ app.get('/api/articles', (req, res) => {
 })
 
 app.post('/api/history', (req, res) => {
-  console.log('API/HISTORY POST REQUEST:', req.body.search);
-  console.log('API/HISTORY POST REQUEST USER ID:', req.user.id);
   let trend = req.body.search;
-  let user = req.user.id;
+  let userId = req.session.user[0].id;
   if (cleanData.checkIsReadyForDb(trend)) {
     trend = cleanData.prepForDb(trend);
-    queries.insertSearch(trend, (err, resp) => {
+    queries.insertSearch(trend, userId, (err, resp) => {
       if (err) {
         res.status(500).send(err);
       } else {
