@@ -34,7 +34,8 @@ db.schema.hasTable('trends').then(function (exists) {
       trend.increments('id').primary();
       trend.string('name');
       trend.timestamps(true, true);
-      trend.integer('userID').references('id').inTable('users');
+      trend.integer('userId');
+      // trend.foreign('userId').references('id').inTable('users');
     }).then(function (table) {
       console.log('Created Table trends');
     });
@@ -71,4 +72,4 @@ db.schema.hasTable('stories').then(function (exists) {
   }
 });
 
-//create favorites table 
+
