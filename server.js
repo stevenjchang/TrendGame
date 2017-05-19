@@ -146,6 +146,7 @@ app.post('/api/history', (req, res) => {
 });
 
 app.get('/api/history', (req, res) => {
+  console.log('HITTING /API/HISTORY ENDPOINT')
   let userId;
   if (req.session.user === undefined) {
     userId = null;
