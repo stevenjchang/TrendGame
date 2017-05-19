@@ -33,6 +33,7 @@ class App extends React.Component {
 
   componentDidMount() {
     if (this.props.match.params.searchterm) {
+      this.setState({trend: this.props.match.params.searchterm.split('+').join(' ')})
       this.collectData(this.props.match.params.searchterm.split('+').join(' '));
     }
     this.getSearchHistory();
@@ -128,6 +129,7 @@ class App extends React.Component {
   }
 
   postSearchHistory(trend) {
+    console.log('posting a search!')
     axios.post('/api/history', {
       search: trend
     }).then(response => {
@@ -150,10 +152,12 @@ class App extends React.Component {
     });
   }
 
-  setTrend(trend) {
-    this.setState({trend: trend}, () => {
-      collectData(this.state.trend, this.state.start, this.state.end)
-    })
+  setTrend(trend, callback) {
+    if (callback) {
+      this.setState({trend: trend}, callback())
+    } else {
+      this.setState({trend: trend});
+    }
   }
   
   handleChartClick(date) {

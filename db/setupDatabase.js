@@ -8,7 +8,7 @@ var db = require('knex')({
   client: 'pg',
   connection: {
     host: 'localhost',
-    user: '',
+    user: 'joshuastagner',
     password: '',
     database: 'trendgame'
   }

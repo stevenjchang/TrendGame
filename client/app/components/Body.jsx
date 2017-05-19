@@ -5,6 +5,7 @@ import TrendChart from './Chart';
 import Input from './Input';
 import History from './History';
 import ArticleList from './ArticleList';
+import DateSelector from './DateSelector.jsx';
 
 const cookies = new Cookies();
 
@@ -12,6 +13,7 @@ class Body extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     let loggedIn;
     if (cookies.get('loggedIn') === 'true') {
@@ -30,7 +32,14 @@ class Body extends React.Component {
           setTrend={this.props.setTrend}
           trend={this.props.trend}
         />
-        <History history={this.props.history} userHistory={this.props.userHistory} collectData={this.props.collectData} />
+        <History history={this.props.history} userHistory={this.props.userHistory} collectData={this.props.collectData} loggedIn={this.props.loggedIn}/>
+        <DateSelector 
+          trend={this.props.trend}
+          collectData={this.props.collectData}
+          setTrend={this.props.setTrend}
+        />
+        {login}
+        <History history={this.props.history} userHistory={this.props.userHistory} collectData={this.props.collectData}/>
         <TrendChart getChartClick={this.props.getChartClick} chartData={this.props.chartData} storyPoint={this.props.storyPoint}/>
         <ArticleList selectedDate={this.props.selectedDate} trend={this.props.chartData.trend} storyPoint={this.props.storyPoint}/>
       </div>

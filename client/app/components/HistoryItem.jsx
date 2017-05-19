@@ -10,7 +10,7 @@ const HistoryItem = ({ term, index, collectData }) => {
       )
     : (
         <li className="list-inline-item">
-          &middot; <a href={'/#/' + term.split(' ').join('+')} className="text-muted" onClick={() => collectData(term)}>{term}</a>
+          &middot; <a href={'/#/' + term.split(' ').join('+')} className="text-muted">{term}</a>
         </li>
       );
 
