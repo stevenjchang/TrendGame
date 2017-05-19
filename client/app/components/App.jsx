@@ -38,6 +38,7 @@ class App extends React.Component {
     if (cookies.get('loggedIn') === 'true') {
       this.getUserSearchHistory();
     }
+    this.loggedIn();
   }
 
   loggedIn() {
