@@ -43,7 +43,6 @@ app.get('/api/timeline', (req, res) => {
   }
 
   trend = cleanData.prepForAylien(trend);
-
   makeTimeline(trend, startTime, endTime, (err, data) => {
     if (err) {
       res.status(500).send(err);

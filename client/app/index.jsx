@@ -1,7 +1,9 @@
 import React from 'react';
 import {render} from 'react-dom';
-import App from './components/App.jsx';
+
+import axios from 'axios';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import App from './components/App.jsx';
 
 class BoltOnRouter extends React.Component {
   constructor(props) {
@@ -20,7 +22,6 @@ class BoltOnRouter extends React.Component {
   } 
 
 }
-
 
 render(<BoltOnRouter />, document.getElementById('app'));
 

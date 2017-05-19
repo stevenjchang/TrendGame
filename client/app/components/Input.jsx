@@ -32,6 +32,8 @@ export default class Input extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    document.querySelector('.search-input').blur();
     this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
     window.location.href = 'http://127.0.0.1:8080/#/' + this.state.trend.split(' ').join('+');
   }
@@ -56,7 +58,7 @@ export default class Input extends React.Component {
     return (
       <div className="row mb-4">
         <div className="col">
-          <form
+          <form 
             action="submit"
             onSubmit={this.handleSubmit}
           >
@@ -72,7 +74,7 @@ export default class Input extends React.Component {
               </input>
               <span className="input-group-btn">
                 <button className="btn btn-primary" type="submit">
-                  Search
+                    Search
                 </button>
               </span>
             </div>

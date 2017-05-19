@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import axios from 'axios';
 import Layout from './Layout';
+import formatQuery from './../../../utilities/formatQuery.js'
 var Loader = require('halogen/PulseLoader');
 
 class App extends React.Component {
@@ -44,7 +45,6 @@ class App extends React.Component {
       }
     })
     .then(response => {
-
       if (response.data.timeline === null) {
         this.setState({
           loader: <div className="text-center"><h6>Sorry, try a less obscure trend.</h6></div>
@@ -150,7 +150,7 @@ class App extends React.Component {
       this.setState({'storyPoint': []});
     })
   }
-
+  
   render () {
     return (
       <Layout
@@ -164,6 +164,7 @@ class App extends React.Component {
         trend={this.state.trend}
         getChartClick={this.handleChartClick}
         selectedDate={this.state.selectedDate}
+
       />
     );
   }
