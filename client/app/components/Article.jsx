@@ -26,6 +26,7 @@ class Article extends React.Component {
     }
     return (
       <div className="col-12 col-md-6">
+        <button>Add to Favorite</button>
         <a href={this.props.story.url} className="card-clickable" target="_blank">
           <div className="card">
             <img
