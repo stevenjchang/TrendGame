@@ -15,7 +15,8 @@ class App extends React.Component {
       trend: '',
       storyPoint: {},
       loader: false,
-      history: []
+      history: [],
+      selectedDate: null
     };
     this.collectData = this.collectData.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -125,9 +126,19 @@ class App extends React.Component {
     })
     .then(response => {
       var newStoryPoint = JSON.parse(JSON.stringify(this.state.storyPoint));
-      console.log("state storypoint:", newStoryPoint);
       newStoryPoint.stories = response.data[0].stories;
       this.setState({'storyPoint': newStoryPoint});
+      let options = {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      }
+      this.setState({'selectedDate': date.toLocaleDateString("en-us", options)});
+    })
+    .catch(error => {
+      console.log(error)
+      this.setState({'storyPoint': []});
     })
   }
 
@@ -141,6 +152,7 @@ class App extends React.Component {
         storyPoint={this.state.storyPoint}
         history={this.state.history}
         getChartClick={this.handleChartClick}
+        selectedDate={this.state.selectedDate}
       />
     );
   }
