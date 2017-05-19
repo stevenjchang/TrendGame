@@ -2,10 +2,8 @@ var db = require('./config');
 const findUnique = require('../utilities/findUnique');
 
 const findUser = (googleID, callback) => {
-  console.log('GOOGLEID FROM FINDUSER QUERY', googleID)
   db('users').where('googleID', googleID)
     .then(response => {
-      console.log('FIND USER QUERY RESPONSE:', response)
       callback(null, response);
     })
     .catch(error => {
@@ -26,8 +24,6 @@ const addUser = (name, googleID, token, callback) => {
 
 //modify to accept user id
 const insertSearch = (searchString, userId, callback) => {
-  console.log('INSERTSEARCH SEARCHSTRING:', searchString);
-  console.log('INSERT SEARCH USER ID', userId);
   db('trends').insert({name: searchString, user_id: userId}).then((resp) => {
     callback(null, resp);
   }).catch((err) => {
@@ -36,7 +32,6 @@ const insertSearch = (searchString, userId, callback) => {
 };
 
 const getSearches = (numberOfSearches, userId, callback) => {
-  console.log('USER ID FROM GET SEARCHERS:', userId)
   db.select('name').from('trends').then((data) => {
   // db('trends').whereNot('userId', userId).then(data => {
     let dataNoDups = findUnique(data);
