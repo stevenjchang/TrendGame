@@ -14,6 +14,8 @@ var db = require('knex')({
   }
 });
 
+var test;
+
 db.schema.hasTable('users').then(exists => {
   if (!exists) {
     db.schema.createTable('users', (user) => {
