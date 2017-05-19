@@ -88,3 +88,10 @@ a.card-clickable:hover div.card {
   -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
 }
+
+/* Speech Input Style
+-------------------------------------------------- */
+.speech {
+  border: 50px solid #f14242;
+  margin-bottom: 10px;
+}
