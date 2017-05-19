@@ -19,9 +19,13 @@ class App extends React.Component {
       storyPoint: {},
       loader: false,
       history: [],
+<<<<<<< HEAD
       userHistory: [],
       selectedDate: null,
       loggedIn: false
+=======
+      selectedDate: null
+>>>>>>> Add my changes
     };
     this.collectData = this.collectData.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -174,7 +178,8 @@ class App extends React.Component {
       this.setState({'storyPoint': []});
     })
   }
-  
+
+
   render () {
     return (
       <Layout
