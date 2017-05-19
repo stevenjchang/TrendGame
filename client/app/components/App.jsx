@@ -24,6 +24,11 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getSearchHistory();
+    console.log('searchterm = ',this.props.match.params.searchterm);
+    if (this.props.match.params.searchterm) {
+      console.log('IF searchterm exists');
+      this.collectData(this.props.match.params.searchterm);
+    }
   }
 
   collectData(trend, startTime, endTime) {
@@ -39,7 +44,6 @@ class App extends React.Component {
       }
     })
     .then(response => {
-
       if (response.data.timeline === null) {
         this.setState({
           loader: <div className="text-center"><h6>Sorry, try a less obscure trend.</h6></div>
@@ -127,8 +131,6 @@ class App extends React.Component {
     );
   }
 }
-
-
 
 export default App;
 
