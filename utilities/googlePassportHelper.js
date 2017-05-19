@@ -9,10 +9,8 @@ passport.use(new GoogleStrategy({
   callbackURL: "http://127.0.0.1:8080/auth/google/callback"
   },
   (accessToken, refreshToken, profile, done) => {
-    console.log('Logging profile info from PassportHelper', profile);
     process.nextTick(() => {
       queries.findUser(profile.id, (err, user) => {
-        console.log('user from queries.findUser', user);
         if (err) {
           done(err);
         }
@@ -24,7 +22,6 @@ passport.use(new GoogleStrategy({
             if (err) {
               done(err, null);
             } else {
-              console.log('RESULTS FROM QUERIES.ADDUSER', results)
               done(null, results);
               }
           })
