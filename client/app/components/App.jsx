@@ -47,12 +47,6 @@ class App extends React.Component {
     }
   }
 
-  loggedIn() {
-    if (cookies.get('loggedIn') === 'true') {
-      this.setState({loggedIn: !this.state.loggedIn})
-    }
-  }
-
   collectData(trend, startTime, endTime) {
     this.setState({
       loader: <div className="text-center"><Loader color="#dc3c3c" size="16px" margin="4px"/></div>,
