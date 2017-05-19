@@ -1,17 +1,6 @@
 var db = require('./config');
 const findUnique = require('../utilities/findUnique');
 
-
-// const addOrFindUser = (googleID, callback) => {
-//   db('users').insert({googleID: googleID})
-//     .then(response => {
-//       callback(null, response);
-//     })
-//     .catch(error => {
-//       callback(error, null);
-//     });
-// }
-
 const findUser = (googleID, callback) => {
   console.log('GOOGLEID FROM FINDUSER QUERY', googleID)
   db('users').where('googleID', googleID)
@@ -35,19 +24,19 @@ const addUser = (name, googleID, token, callback) => {
     });
 }
 
-
-
-
-const insertSearch = (searchString, callback) => {
-  db('trends').insert({name: searchString}).then((resp) => {
+//modify to accept user id
+const insertSearch = (searchString, userId, callback) => {
+  console.log('INSERTSEARCH SEARCHSTRING:', searchString);
+  console.log('INSERT SEARCH USER ID', userId);
+  db('trends').insert({name: searchString, userId: userId}).then((resp) => {
     callback(null, resp);
   }).catch((err) => {
     callback(err, null);
   });
 };
 
-const getSearches = (numberOfSearches, callback) => {
-  db.select('name').from('trends').then((data) => {
+const getSearches = (numberOfSearches, userId, callback) => {
+  db.select('name').from('trends').whereNot('userId', userId).then((data) => {
     let dataNoDups = findUnique(data);
     let dataSlice = dataNoDups.slice(0, numberOfSearches);
     let dataClean = dataSlice.map((search) => {
@@ -59,11 +48,20 @@ const getSearches = (numberOfSearches, callback) => {
   });
 };
 
-// get User's saved trends
+const getUserSearches = (numberOfSearches, userId, callback) => {
+  // db('trends').where('userId', userId)
+  db.select('name').where('userId', userId).from('trends')
+    .then( data => {
+      callback(null, data);
+    })
+    .catch( error => {
+      callback(error, null);
+    })
+}
 
-// save User's favorited trends
 
 module.exports.insertSearch = insertSearch;
 module.exports.getSearches = getSearches;
 module.exports.findUser = findUser;
 module.exports.addUser = addUser;
+module.exports.getUserSearches = getUserSearches;
