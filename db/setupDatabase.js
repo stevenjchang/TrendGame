@@ -21,6 +21,7 @@ db.schema.hasTable('users').then(exists => {
       user.string('name');
       user.string('googleID');
       user.string('token');
+      user.string('photo');
     })
     .then((table) => {
       console.log('Created users table');
