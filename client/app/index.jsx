@@ -9,6 +9,7 @@ class BoltOnRouter extends React.Component {
     super(props)
   }
   render () {
+    console.log('***USER SEARCH HISTORY!!***', this.state.userHistory)
     return (
       <Router>
         <Switch>
