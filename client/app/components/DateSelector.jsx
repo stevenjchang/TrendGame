@@ -16,9 +16,11 @@ class DateSelector extends React.Component {
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
   }
 
-  // componentWillReceiveProps() {
-  //   this.setState({startTime: '', endTime: ''});
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.trend !== this.props.trend) {
+      this.setState({startTime: '', endTime: ''});
+    }
+  }
 
   handleStartDateChange(date) {
     this.setState({
@@ -26,6 +28,8 @@ class DateSelector extends React.Component {
     }, () => {
       this.props.collectData(this.props.trend, this.state.startTime, this.state.endTime)
     });
+
+    this.setState({})
   }
 
   handleEndDateChange(date) {
