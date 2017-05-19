@@ -92,6 +92,16 @@ a.card-clickable:hover div.card {
 /* Speech Input Style
 -------------------------------------------------- */
 .speech {
-  border: 50px solid #f14242;
   margin-bottom: 10px;
+}
+.mic-button {
+  font-size: 2em;
+  color: white;
+  background-color: #FA2D4B;
+  width: 50px;
+  text-align: center;
+}
+
+.mic-icon {
+  background-color: transparent;
 }
