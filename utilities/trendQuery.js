@@ -7,6 +7,7 @@ module.exports = (trend, startTime, endTime, callback) => {
   startTime = startTime || backDateByMonths(15);
   endTime = endTime || new Date();
 
+
   // const options = {
   //   keyword: query.q,
   //   // startTime: startTime
@@ -40,3 +41,4 @@ module.exports = (trend, startTime, endTime, callback) => {
     })
 
 };
+

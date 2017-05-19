@@ -4,6 +4,9 @@ import axios from 'axios';
 import Layout from './Layout';
 import formatQuery from './../../../utilities/formatQuery.js'
 var Loader = require('halogen/PulseLoader');
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 class App extends React.Component {
   constructor(props) {
@@ -30,6 +33,9 @@ class App extends React.Component {
       this.collectData(this.props.match.params.searchterm.split('+').join(' '));
     }
     this.getSearchHistory();
+    if (cookies.get('loggedIn') === 'true') {
+      this.getUserSearchHistory();
+    }
   }
 
   collectData(trend, startTime, endTime) {
@@ -97,6 +103,16 @@ class App extends React.Component {
     });
   }
 
+   getUserSearchHistory() {
+    axios.get('/api/history/user')
+    .then(response => {
+      console.log('!!!!RESPONSE FROM GET USER HISTORY', response)
+      this.setState({
+        userHistory: response.data
+      });
+    });
+  }
+
   postSearchHistory(trend) {
     axios.post('/api/history', {
       search: trend
@@ -160,11 +176,11 @@ class App extends React.Component {
         collectData={this.collectData}
         storyPoint={this.state.storyPoint}
         history={this.state.history}
+        userHistory={this.state.userHistory}
         setTrend={this.setTrend}
         trend={this.state.trend}
         getChartClick={this.handleChartClick}
         selectedDate={this.state.selectedDate}
-
       />
     );
   }

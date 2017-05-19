@@ -6,7 +6,26 @@ const url = '<INSERT DB URL HERE FOR SCHEMA UPLOAD>' + '?ssl=true';
 
 var db = require('knex')({
   client: 'pg',
-  connection: url
+  connection: {
+    host: 'localhost',
+    user: 'yujin',
+    password: '',
+    database: 'trendgame'
+  }
+});
+
+db.schema.hasTable('users').then(exists => {
+  if (!exists) {
+    db.schema.createTable('users', (user) => {
+      user.increments('id').primary();
+      user.string('name');
+      user.string('googleID');
+      user.string('token');
+    })
+    .then((table) => {
+      console.log('Created users table');
+    })
+  }
 });
 
 db.schema.hasTable('trends').then(function (exists) {
@@ -15,11 +34,14 @@ db.schema.hasTable('trends').then(function (exists) {
       trend.increments('id').primary();
       trend.string('name');
       trend.timestamps(true, true);
+      trend.integer('userId');
+      // trend.foreign('userId').references('id').inTable('users');
     }).then(function (table) {
       console.log('Created Table trends');
     });
   }
 });
+
 db.schema.hasTable('weeks').then(function (exists) {
   if (!exists) {
     db.schema.createTable('weeks', function (week) {
@@ -33,6 +55,7 @@ db.schema.hasTable('weeks').then(function (exists) {
     });
   }
 });
+
 db.schema.hasTable('stories').then(function (exists) {
   if (!exists) {
     db.schema.createTable('stories', function (story) {
@@ -48,3 +71,5 @@ db.schema.hasTable('stories').then(function (exists) {
     });
   }
 });
+
+
