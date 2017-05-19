@@ -1,5 +1,5 @@
 const formatAylienData = (data) => {
-
+ console.log('Alyien data: ', data)
   let dataParsed = {};
 
   try {
