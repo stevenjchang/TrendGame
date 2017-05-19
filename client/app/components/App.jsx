@@ -14,12 +14,14 @@ class App extends React.Component {
       trend: '',
       storyPoint: {},
       loader: false,
-      history: []
+      history: [],
+      selectedDate: null
     };
     this.collectData = this.collectData.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
     this.setTrend = this.setTrend.bind(this);
+    this.handleChartClick = this.handleChartClick.bind(this);
   }
 
   componentDidMount() {
@@ -122,6 +124,32 @@ class App extends React.Component {
       collectData(this.state.trend, this.state.start, this.state.end)
     })
   }
+  
+  handleChartClick(date) {
+    let trend = this.state.trend;
+    axios.get('/api/articles', {
+      params: {
+        trend: trend,
+        date: date
+      }
+    })
+    .then(response => {
+      var newStoryPoint = JSON.parse(JSON.stringify(this.state.storyPoint));
+      newStoryPoint.stories = response.data[0].stories;
+      this.setState({'storyPoint': newStoryPoint});
+      let options = {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      }
+      this.setState({'selectedDate': date.toLocaleDateString("en-us", options)});
+    })
+    .catch(error => {
+      console.log(error)
+      this.setState({'storyPoint': []});
+    })
+  }
 
   render () {
     return (
@@ -134,6 +162,8 @@ class App extends React.Component {
         history={this.state.history}
         setTrend={this.setTrend}
         trend={this.state.trend}
+        getChartClick={this.handleChartClick}
+        selectedDate={this.state.selectedDate}
       />
     );
   }
