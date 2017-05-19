@@ -14,6 +14,7 @@ export default class Input extends React.Component {
       displayTrend: '',
       startTime: '',
       endTime: ''
+      // theStream: null
     };
     this.handeInput = this.handeInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,6 +25,13 @@ export default class Input extends React.Component {
   componentWillReceiveProps() {
     this.setState({trend: this.props.trend});
   }
+
+  // componentDidMount() {
+  //   navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+  //   .then(function(stream){
+  //     this.setState({theStream: stream});
+  //   });
+  // }
 
   handeInput(e) {
     // console.log(window.location + e.target.value)
@@ -52,15 +60,26 @@ export default class Input extends React.Component {
     });
   }
 
+
+
+  // handleStartRecord(e) {
+  //   this.state.theStream
+  // }
+
+  // handleEndRecord(e) {
+  //   console.log("up")
+  // }
+
   render () {
     return (
       <div className="row mb-4">
         <div className="col">
+          {/*<button className="get-audio" onMouseDown={this.handleStartRecord} onMouseUp={this.handleEndRecord}>Hello</button>*/}
           <form 
             action="submit"
             onSubmit={this.handleSubmit}
           >
-            <div className="input-group">
+            <div className="input-group speech">
               <input
                 value={this.state.trend}
                 className="form-control search-input"
