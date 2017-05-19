@@ -26,6 +26,7 @@ export default class Input extends React.Component {
     e.preventDefault();
     document.querySelector('.search-input').blur();
     this.props.collectData(this.state.trend);
+    window.location.href = 'http://localhost:8080/#/' + this.state.trend;
   }
 
   handleStartDateChange(date) {
@@ -48,7 +49,7 @@ export default class Input extends React.Component {
     return (
       <div className="row mb-4">
         <div className="col">
-          <form
+          <form 
             action="submit"
             onSubmit={this.handleSubmit}
           >
@@ -63,7 +64,7 @@ export default class Input extends React.Component {
               </input>
               <span className="input-group-btn">
                 <button className="btn btn-primary" type="submit">
-                  Search
+                    Search
                 </button>
               </span>
             </div>
