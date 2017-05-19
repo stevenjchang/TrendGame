@@ -36,7 +36,9 @@ const insertSearch = (searchString, userId, callback) => {
 };
 
 const getSearches = (numberOfSearches, userId, callback) => {
-  db.select('name').from('trends').whereNot('userId', userId).then((data) => {
+  console.log('USER ID FROM GET SEARCHERS:', userId)
+  // db.select('name').from('trends').whereNot('userId', userId).then((data) => {
+  db('trends').whereNot('userId', userId).orWhere('userId', '!=', null).then(data => {
     let dataNoDups = findUnique(data);
     let dataSlice = dataNoDups.slice(0, numberOfSearches);
     let dataClean = dataSlice.map((search) => {
