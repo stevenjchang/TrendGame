@@ -22,7 +22,6 @@ class App extends React.Component {
       userHistory: [],
       selectedDate: null,
       loggedIn: false
-      selectedDate: null
     };
     this.collectData = this.collectData.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -40,6 +39,12 @@ class App extends React.Component {
       this.getUserSearchHistory();
     }
     this.loggedIn();
+  }
+
+  loggedIn() {
+    if (cookies.get('loggedIn') === 'true') {
+      this.setState({loggedIn: !this.state.loggedIn})
+    }
   }
 
   loggedIn() {
