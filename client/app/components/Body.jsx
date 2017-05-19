@@ -32,7 +32,6 @@ class Body extends React.Component {
           setTrend={this.props.setTrend}
           trend={this.props.trend}
         />
-        {login}
         <History history={this.props.history} userHistory={this.props.userHistory} collectData={this.props.collectData}/>
         <TrendChart getChartClick={this.props.getChartClick} chartData={this.props.chartData} storyPoint={this.props.storyPoint}/>
         <ArticleList selectedDate={this.props.selectedDate} trend={this.props.chartData.trend} storyPoint={this.props.storyPoint}/>
