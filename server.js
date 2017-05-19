@@ -16,11 +16,6 @@ var worker = require('./workers/worker');
 const app = express();
 const IP = process.env.HOST;
 const PORT = process.env.PORT;
-var speech = require('@google-cloud/speech')({
-  projectId: process.env.SPEECH_PROJ_ID,
-  keyFilename: './keyFile.json'
-});
-
 
 
 app.use(express.static(__dirname + '/client/public'));
