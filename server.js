@@ -123,7 +123,14 @@ app.get('/api/articles', (req, res) => {
 
 app.post('/api/history', (req, res) => {
   let trend = req.body.search;
-  let userId = req.session.user[0].id;
+  console.log('REQ.SESSION.USER WHEN LOGGED OUT', req.session.user)
+  let userId;
+  if (req.session.user === undefined) {
+    userId = null;
+  } else {
+    userId = req.session.user[0].id
+  }
+  // let userId = req.session.user[0].id;
   if (cleanData.checkIsReadyForDb(trend)) {
     trend = cleanData.prepForDb(trend);
     queries.insertSearch(trend, userId, (err, resp) => {
@@ -146,6 +153,19 @@ app.get('/api/history', (req, res) => {
       res.status(200).send(data);
     }
   });
+});
+
+app.get('/api/history/user', (req, res) => {
+  console.log('history/user endpoint has been hit!');
+  res.send(['query1', 'query2', 'query3'])
+  // let userId = req.session.user[0].id;
+  // queries.getUserSearches(10, userId, (err, data) => {
+  //   if (err) {
+  //     res.status(500).send(err);
+  //   } else {
+  //     res.status(200).send(data);
+  //   }
+  // });
 });
 
 app.get('/api/worker', (req, res) => {
