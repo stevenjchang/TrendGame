@@ -9,8 +9,6 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 var worker = require('./workers/worker');
 
-const dummyData = require('./tests/fixtures/stitched-timeline');
-
 const app = express();
 const IP = process.env.HOST;
 const PORT = process.env.PORT;
@@ -45,14 +43,13 @@ app.get('/api/timeline', (req, res) => {
   }
 
   trend = cleanData.prepForAylien(trend);
-  res.status(200).send(dummyData);
-  // makeTimeline(trend, startTime, endTime, (err, data) => {
-  //   if (err) {
-  //     res.status(500).send(err);
-  //   } else {
-  //     res.status(200).send(data);
-  //   }
-  // });
+  makeTimeline(trend, startTime, endTime, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 app.get('/api/articles', (req, res) => {
