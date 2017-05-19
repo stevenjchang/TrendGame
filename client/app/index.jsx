@@ -7,7 +7,7 @@ class BoltOnRouter extends React.Component {
   constructor(props) {
     super(props)
   }
-
+  
   render () {
     return (
       <Router>
@@ -18,6 +18,7 @@ class BoltOnRouter extends React.Component {
       </Router>
     )
   } 
+
 }
 
 
