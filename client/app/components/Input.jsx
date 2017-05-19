@@ -1,6 +1,9 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import backDate from './../../../utilities/backDate.js'
+import { Route, Redirect } from 'react-router'
+
 
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
@@ -8,7 +11,7 @@ export default class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      trend: '',
+      displayTrend: '',
       startTime: '',
       endTime: ''
     };
@@ -18,14 +21,19 @@ export default class Input extends React.Component {
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
   }
 
+  componentWillReceiveProps() {
+    this.setState({trend: this.props.trend});
+  }
+
   handeInput(e) {
+    // console.log(window.location + e.target.value)
     this.setState({trend: e.target.value});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    document.querySelector('.search-input').blur();
-    this.props.collectData(this.state.trend);
+    this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
+    window.location.href = 'http://127.0.0.1:8080/#/' + this.state.trend.split(' ').join('+');
   }
 
   handleStartDateChange(date) {
@@ -54,6 +62,7 @@ export default class Input extends React.Component {
           >
             <div className="input-group">
               <input
+                value={this.state.trend}
                 className="form-control search-input"
                 type="text"
                 placeholder="Enter a topic"
@@ -74,12 +83,14 @@ export default class Input extends React.Component {
               className="form-control search-input"
               selected={this.state.startTime}
               onChange={this.handleStartDateChange}
+              minDate={backDate(15)}
             />
             endTime  
             <DatePicker 
               className="form-control search-input"
               selected={this.state.endTime}
               onChange={this.handleEndDateChange}
+              minDate={backDate(15)}
             />
           </div>
         </div>
