@@ -24,9 +24,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getSearchHistory();
-    console.log('searchterm = ',this.props.match.params.searchterm);
     if (this.props.match.params.searchterm) {
-      console.log('IF searchterm exists');
       this.collectData(this.props.match.params.searchterm);
     }
   }
