@@ -28,7 +28,7 @@ const addUser = (name, googleID, token, callback) => {
 const insertSearch = (searchString, userId, callback) => {
   console.log('INSERTSEARCH SEARCHSTRING:', searchString);
   console.log('INSERT SEARCH USER ID', userId);
-  db('trends').insert({name: searchString, userId: userId}).then((resp) => {
+  db('trends').insert({name: searchString, user_id: userId}).then((resp) => {
     callback(null, resp);
   }).catch((err) => {
     callback(err, null);
@@ -37,8 +37,8 @@ const insertSearch = (searchString, userId, callback) => {
 
 const getSearches = (numberOfSearches, userId, callback) => {
   console.log('USER ID FROM GET SEARCHERS:', userId)
-  // db.select('name').from('trends').whereNot('userId', userId).then((data) => {
-  db('trends').whereNot('userId', userId).orWhere('userId', '!=', null).then(data => {
+  db.select('name').from('trends').then((data) => {
+  // db('trends').whereNot('userId', userId).then(data => {
     let dataNoDups = findUnique(data);
     let dataSlice = dataNoDups.slice(0, numberOfSearches);
     let dataClean = dataSlice.map((search) => {
