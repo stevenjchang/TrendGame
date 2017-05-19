@@ -32,7 +32,6 @@ module.exports = (trend, startTime, endTime, callback) => {
     }
   })
     .then(response => {
-      console.log('response from scotts app: ', response.data);
       callback(null, sanitizeTrend(response.data))
     })
     .catch(error => {
