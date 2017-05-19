@@ -12,6 +12,7 @@ class BoltOnRouter extends React.Component {
     return (
       <Router>
         <Switch>
+          <Route path='/' component={App} />
           <Route path='/:searchterm' component={App} />
         </Switch>
       </Router>
