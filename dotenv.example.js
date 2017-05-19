@@ -7,4 +7,3 @@ DB_PASSWORD=
 DB_NAME=trendGame
 PORT=8080
 HOST=localhost
-SPEECH_PROJ_ID=not-the-real-app-name
