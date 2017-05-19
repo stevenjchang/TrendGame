@@ -2,7 +2,6 @@ import React from 'react';
 import HistoryItem from './HistoryItem';
 
 const History = ({ history, userHistory, collectData }) => {
-  {console.log('userHistory&&&&&&&', userHistory)}
   return (
     <div className="row mb-5">
 
