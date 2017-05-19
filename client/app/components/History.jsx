@@ -1,7 +1,8 @@
 import React from 'react';
 import HistoryItem from './HistoryItem';
 
-const History = ({ history, userHistory, collectData }) => {
+const History = ({ history, userHistory, collectData, loggedIn}) => {
+  {console.log('LOGGED IN STATE:', loggedIn)}
   return (
     <div className="row mb-5">
 
@@ -13,7 +14,7 @@ const History = ({ history, userHistory, collectData }) => {
           })}
         </ul>
       </div>
-
+      {loggedIn ? 
       <div className="col text-center">
         <small>My searches</small>
         <ul className="list-inline text-center text-muted">
@@ -24,6 +25,9 @@ const History = ({ history, userHistory, collectData }) => {
           })}
         </ul>
       </div>
+      :
+      <div>USER NOT SIGNED IN</div>
+      }
     </div>
   );
 };
