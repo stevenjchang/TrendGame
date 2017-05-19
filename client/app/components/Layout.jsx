@@ -3,7 +3,7 @@ import Body from './Body';
 import Footer from './Footer';
 import Header from './Header';
 
-const Layout = ({ chartData, collectData, storyPoint, history, addStart, addEnd, getChartClick}) => {
+const Layout = ({ selectedDate, chartData, collectData, storyPoint, history, addStart, addEnd, getChartClick}) => {
   return (
     <div>
       <div className="container">
@@ -16,6 +16,7 @@ const Layout = ({ chartData, collectData, storyPoint, history, addStart, addEnd,
           storyPoint={storyPoint}
           history={history}
           getChartClick={getChartClick}
+          selectedDate={selectedDate}
         />
       </div>
       <Footer/>
