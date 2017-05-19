@@ -2,7 +2,6 @@ var db = require('./config');
 const findUnique = require('../utilities/findUnique');
 
 const findUser = (googleID, callback) => {
-  console.log('GOOGLEID FROM FINDUSER QUERY', googleID)
   db('users').where('googleID', googleID)
     .then(response => {
       console.log('FIND USER QUERY RESPONSE:', response)
@@ -13,8 +12,9 @@ const findUser = (googleID, callback) => {
     })
 }
 
-const addUser = (name, googleID, token, callback) => {
-  db('users').insert({name: name, googleID: googleID, token: token})
+//add image url 
+const addUser = (name, googleID, token, photo, callback) => {
+  db('users').insert({name: name, googleID: googleID, token: token, photo: photo})
     .then(response => {
       callback(null, response);
     })
@@ -28,7 +28,7 @@ const addUser = (name, googleID, token, callback) => {
 const insertSearch = (searchString, userId, callback) => {
   console.log('INSERTSEARCH SEARCHSTRING:', searchString);
   console.log('INSERT SEARCH USER ID', userId);
-  db('trends').insert({name: searchString, user_id: userId}).then((resp) => {
+  db('trends').insert({name: searchString, userId: userId}).then((resp) => {
     callback(null, resp);
   }).catch((err) => {
     callback(err, null);
@@ -36,10 +36,8 @@ const insertSearch = (searchString, userId, callback) => {
 };
 
 const getSearches = (numberOfSearches, userId, callback) => {
-  console.log('USER ID FROM GET SEARCHERS:', userId)
-  db.select('name').from('trends').then((data) => {
-  // db('trends').whereNot('userId', userId).then(data => {
-    let dataNoDups = findUnique(data);
+  db.raw(`SELECT name FROM trends WHERE "userId" !=3 OR "userId" IS NULL`).then(data => {
+    let dataNoDups = findUnique(data.rows);
     let dataSlice = dataNoDups.slice(0, numberOfSearches);
     let dataClean = dataSlice.map((search) => {
       return search.name;
