@@ -181,7 +181,7 @@ class App extends React.Component {
       this.setState({'storyPoint': []});
     })
   }
-  
+
   render () {
     return (
       <Layout
