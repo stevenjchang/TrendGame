@@ -143,7 +143,6 @@ app.post('/api/history', (req, res) => {
 });
 
 app.get('/api/history', (req, res) => {
-  console.log('HITTING /API/HISTORY ENDPOINT')
   let userId;
   if (req.session.user === undefined) {
     userId = null;
@@ -160,7 +159,6 @@ app.get('/api/history', (req, res) => {
 });
 
 app.get('/api/history/user', (req, res) => {
-  // res.send(['query1', 'query2', 'query3'])
   let userId = req.session.user[0].id;
   queries.getUserSearches(10, userId, (err, data) => {
     if (err) {
