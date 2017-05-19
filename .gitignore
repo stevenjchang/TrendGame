@@ -7,3 +7,5 @@ aylienApiKeys.js
 dbLocalConnection.js
 .env
 data
+logfile
+keyFile.json
