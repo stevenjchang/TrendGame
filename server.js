@@ -71,7 +71,6 @@ app.get('/auth/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/' }),
       (req, res) => {
-        console.log('USER FROM CALLBACK:', req.user)
         req.session.user = req.user;
         res.redirect('/');
   });
@@ -127,7 +126,6 @@ app.get('/api/articles', (req, res) => {
 
 app.post('/api/history', (req, res) => {
   let trend = req.body.search;
-  console.log('REQ.SESSION.USER WHEN LOGGED OUT', req.session.user)
   let userId;
   if (req.session.user === undefined) {
     userId = null;
@@ -166,7 +164,6 @@ app.get('/api/history', (req, res) => {
 });
 
 app.get('/api/history/user', (req, res) => {
-  console.log('history/user endpoint has been hit!');
   // res.send(['query1', 'query2', 'query3'])
   let userId = req.session.user[0].id;
   queries.getUserSearches(10, userId, (err, data) => {
