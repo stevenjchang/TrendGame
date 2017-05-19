@@ -11,7 +11,6 @@ const makeTimeline = (trend, startTime, endTime, callback) => {
 
     } else {
       const peaks = findPeaks(timeSeries);
-      console.log("THE PEAKS", peaks);
       aylienApi.getNews(trend, peaks, 'title', (err, peakStories) => {
         if (err) {
           callback(err, null);
