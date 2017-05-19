@@ -19,13 +19,10 @@ class App extends React.Component {
       storyPoint: {},
       loader: false,
       history: [],
-<<<<<<< HEAD
       userHistory: [],
       selectedDate: null,
       loggedIn: false
-=======
       selectedDate: null
->>>>>>> Add my changes
     };
     this.collectData = this.collectData.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -42,7 +39,6 @@ class App extends React.Component {
     if (cookies.get('loggedIn') === 'true') {
       this.getUserSearchHistory();
     }
-<<<<<<< HEAD
     this.loggedIn();
   }
 
@@ -50,8 +46,6 @@ class App extends React.Component {
     if (cookies.get('loggedIn') === 'true') {
       this.setState({loggedIn: !this.state.loggedIn})
     }
-=======
->>>>>>> Adds getUserHistory function
   }
 
   collectData(trend, startTime, endTime) {
@@ -122,10 +116,6 @@ class App extends React.Component {
    getUserSearchHistory() {
     axios.get('/api/history/user')
     .then(response => {
-<<<<<<< HEAD
-=======
-      console.log('!!!!RESPONSE FROM GET USER HISTORY', response)
->>>>>>> Adds getUserHistory function
       this.setState({
         userHistory: response.data
       });
