@@ -2,7 +2,6 @@ import React from 'react';
 import Article from './Article.jsx';
 
 const ArticleList = ({ selectedDate, trend, storyPoint }) => {
-  console.log("in article list:", typeof selectedDate, selectedDate);
   let articles;
   let articleHeader;
   if (selectedDate) {
