@@ -8,3 +8,6 @@ DB_NAME=trendGame
 PORT=8080
 HOST=localhost
 
+AYLIEN_TEXT_ID=xxxxx
+AYLIEN_TEXT_KEY=somekeyhere
+
