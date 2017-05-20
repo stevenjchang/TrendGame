@@ -96,10 +96,16 @@ a.card-clickable:hover div.card {
 }
 .mic-button {
   font-size: 2em;
-  color: white;
+  color: #f4f4f4;
   background-color: #FA2D4B;
   width: 50px;
   text-align: center;
+  transition: all .2s ease-in-out;
+}
+
+.mic-button:hover {
+  background-color: #ff4965;
+  color: white;
 }
 
 .mic-icon {
