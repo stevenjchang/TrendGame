@@ -1,5 +1,6 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
+import DateSelector from './DateSelector.jsx'
 
 
 class TrendChart extends React.Component {
@@ -58,13 +59,21 @@ class TrendChart extends React.Component {
       );
     }
     return (
-      <div className="row mb-5">
-        <div className="col">
-          {displayChart}
+      <div>
+        <div>
+          <DateSelector 
+            trend={this.props.trend}
+            collectData={this.props.collectData}
+            setTrend={this.props.setTrend}
+          />
         </div>
-      </div>
+        <div className="row mb-5">
+          <div className="col">
+            {displayChart}
+          </div>
+        </div>
+      </div>  
     );
-
   }
 
 }

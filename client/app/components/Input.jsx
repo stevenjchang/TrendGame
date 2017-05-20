@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import backDate from './../../../utilities/backDate.js'
 import { Route, Redirect } from 'react-router'
+import DateSelector from './DateSelector.jsx';
 
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
@@ -17,15 +18,13 @@ export default class Input extends React.Component {
     };
     this.handeInput = this.handeInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleStartDateChange = this.handleStartDateChange.bind(this);
-    this.handleEndDateChange = this.handleEndDateChange.bind(this);
     this.startDictation = this.startDictation.bind(this);
     this.eatClick = this.eatClick.bind(this);
   }
 
-  componentWillReceiveProps() {
-    this.setState({trend: this.props.trend});
-  }
+  // componentDidReceiveProps() {
+  //   this.setState({trend: this.props.trend});
+  // }
 
   handeInput(e) {
     this.setState({trend: e.target.value});
@@ -36,25 +35,12 @@ export default class Input extends React.Component {
       e.preventDefault();
     }
 
+    this.props.setTrend(this.state.trend, null);
+    this.setState({trend: ''});
+
     document.querySelector('.search-input').blur();
     this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
-    window.location.href = 'http://127.0.0.1:8080/#/' + this.state.trend.split(' ').join('+');
-  }
-
-  handleStartDateChange(date) {
-    this.setState({
-      startTime: date
-    }, () => {
-      this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
-    });
-  }
-
-  handleEndDateChange(date) {
-    this.setState({
-      endTime: date
-    }, () => {
-      this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
-    });
+    window.location.href = '/#' + this.state.trend.split(' ').join('+');
   }
 
   startDictation() {
@@ -123,22 +109,6 @@ export default class Input extends React.Component {
               </span>
             </div>
           </form>
-          <div>
-            startTime  
-            <DatePicker 
-              className="form-control search-input"
-              selected={this.state.startTime}
-              onChange={this.handleStartDateChange}
-              minDate={backDate(15)}
-            />
-            endTime  
-            <DatePicker 
-              className="form-control search-input"
-              selected={this.state.endTime}
-              onChange={this.handleEndDateChange}
-              minDate={backDate(15)}
-            />
-          </div>
         </div>
       </div>
     );
