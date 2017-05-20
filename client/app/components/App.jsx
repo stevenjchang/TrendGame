@@ -20,7 +20,6 @@ class App extends React.Component {
       loader: false,
       history: [],
       userHistory: [],
-      userInfo: {},
       selectedDate: null,
       loggedIn: false
     };
@@ -42,18 +41,6 @@ class App extends React.Component {
       this.getUserSearchHistory();
     }
   }
-
-  getUserInfo() {
-    axios.get('/api/user')
-    .then(response => {
-      this.setState({userInfo: response.data})
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }
-
- 
 
   collectData(trend, startTime, endTime) {
     this.setState({
@@ -189,6 +176,7 @@ class App extends React.Component {
   }
 
   render () {
+    console.log('USER INFO FROM APP.JSX : ', this.state.userInfo)
     return (
       <Layout
         addStart={this.handleStartDateChange}
