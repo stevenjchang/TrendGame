@@ -36,10 +36,12 @@ export default class Input extends React.Component {
       e.preventDefault();
     }
 
-    this.props.setTrend(this.state.trend, null);
+    var theSearch = this.state.trend;
+    this.props.setTrend(theSearch, null);
+
 
     document.querySelector('.search-input').blur();
-    this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
+    this.props.collectData(theSearch, this.state.startTime, this.state.endTime)
     window.location.href = '/#' + this.state.trend.split(' ').join('+');
     this.setState({trend: ''});
   }
