@@ -44,7 +44,6 @@ export default class Input extends React.Component {
   }
 
   startDictation() {
-    console.log("started");
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
       this.setState({listening: true});
 

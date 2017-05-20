@@ -4,7 +4,6 @@ const findUnique = require('../utilities/findUnique');
 const findUser = (googleID, callback) => {
   db('users').where('googleID', googleID)
     .then(response => {
-      console.log('response after findUser: ', response);
       callback(null, response);
     })
     .catch(error => {
@@ -19,7 +18,6 @@ const addUser = (name, googleID, token, photo, callback) => {
       callback(null, response);
     })
     .catch(error => {
-      console.error('error from addUser:', error)
       callback(error);
     });
 }

@@ -11,7 +11,6 @@ passport.use(new GoogleStrategy({
   },
   (accessToken, refreshToken, profile, done) => {
     queries.findUser(profile.id, (err, user) => {
-      console.log('from user exisits: ', user)
       if (err) {
         done(err);
       }
@@ -21,11 +20,9 @@ passport.use(new GoogleStrategy({
       else {
         queries.addUser(profile.name.givenName, profile.id, accessToken, profile.photos[0].value, (err, results) => {
           if (err) {
-            console.log('you are erroring!!!!!!!!!!!!!!!!!')
             done(err, null);
           } else {
             queries.findUser(profile.id, (err, user) => {
-              console.log('from user does not exisit: ', user)
               done(null, user);
             })
             }

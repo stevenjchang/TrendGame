@@ -32,7 +32,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-      console.log(this.props.match)
     if (this.props.match.params.searchterm) {
       this.setState({trend: this.props.match.params.searchterm.split('+').join(' ')})
       this.collectData(this.props.match.params.searchterm.split('+').join(' '));
@@ -130,7 +129,6 @@ class App extends React.Component {
   }
 
   postSearchHistory(trend) {
-    console.log('posting a search!')
     axios.post('/api/history', {
       search: trend
     }).then(response => {
