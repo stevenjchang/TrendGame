@@ -25,7 +25,7 @@ const addUser = (name, googleID, token, photo, callback) => {
 
 //modify to accept user id
 const insertSearch = (searchString, userId, callback) => {
-  db('trends').insert({name: searchString, user_id: userId}).then((resp) => {
+  db('trends').insert({name: searchString, userId: userId}).then((resp) => {
     callback(null, resp);
   }).catch((err) => {
     callback(err, null);
@@ -33,7 +33,15 @@ const insertSearch = (searchString, userId, callback) => {
 };
 
 const getSearches = (numberOfSearches, userId, callback) => {
-  db.raw(`SELECT name FROM trends WHERE "userId" !=3 OR "userId" IS NULL`).then(data => {
+  let query; 
+  if (userId === 0) {
+    //select all names from trends, both null and not null userId column values
+    query = 'SELECT name FROM trends WHERE "userId" > 0 OR "userId" IS NULL'
+  } else {
+    //select all names where userId does not equal passed in userId and all null values
+    query = 'SELECT name FROM trends WHERE "userId" !=' + userId + 'OR "userId" IS NULL'
+  } 
+   db.raw(query).then(data => {
     let dataNoDups = findUnique(data.rows);
     let dataSlice = dataNoDups.slice(0, numberOfSearches);
     let dataClean = dataSlice.map((search) => {
@@ -49,6 +57,7 @@ const getUserSearches = (numberOfSearches, userId, callback) => {
   // db('trends').where('userId', userId)
   db.select('name').where('userId', userId).from('trends')
     .then( data => {
+      
       callback(null, data);
     })
     .catch( error => {
