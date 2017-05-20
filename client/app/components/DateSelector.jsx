@@ -43,20 +43,22 @@ class DateSelector extends React.Component {
   render () {
     return (
       <div>
-        startTime  
-        <DatePicker 
-          className="form-control search-input"
-          selected={this.state.startTime}
-          onChange={this.handleStartDateChange}
-          minDate={backDate(15)}
-        />
-        endTime  
-        <DatePicker 
-          className="form-control search-input"
-          selected={this.state.endTime}
-          onChange={this.handleEndDateChange}
-          minDate={backDate(15)}
-        />
+        <div className="date-input">Start Date:  
+          <DatePicker 
+            className="form-control search-input"
+            selected={this.state.startTime}
+            onChange={this.handleStartDateChange}
+            minDate={backDate(15)}
+          />
+        </div>
+        <div className="date-input">End Date:
+          <DatePicker 
+            className="form-control search-input"
+            selected={this.state.endTime}
+            onChange={this.handleEndDateChange}
+            minDate={backDate(15)}
+          />
+        </div>
       </div>
     )
   } 
