@@ -54,7 +54,6 @@ const getSearches = (numberOfSearches, userId, callback) => {
 };
 
 const getUserSearches = (numberOfSearches, userId, callback) => {
-  // db('trends').where('userId', userId)
   db.select('name').where('userId', userId).from('trends')
     .then( data => {      
       callback(null, data);
