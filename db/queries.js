@@ -75,7 +75,7 @@ const getUserInfo = (userId, callback) => {
     })
 }
 
-const getIsFavored = (trend, userId, callback) => {
+const getToggleFavorite = (trend, userId, callback) => {
   db.select('isFavored').where('userID', userId).from('trends')
     .then( data => 
       db.update('isFavored', !data).where('userId', userId).from('trends'))
