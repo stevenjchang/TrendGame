@@ -167,14 +167,16 @@ app.get('/api/history', (req, res) => {
 });
 
 app.get('/api/history/user', (req, res) => {
-  let userId = req.session.user[0].id;
-  queries.getUserSearches(10, userId, (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(data);
-    }
-  });
+  if (req.session.user) {
+    let userId = req.session.user[0].id;
+    queries.getUserSearches(10, userId, (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  }
 });
 
 app.get('/api/worker', (req, res) => {
