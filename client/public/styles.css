@@ -88,3 +88,24 @@ a.card-clickable:hover div.card {
   -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
 }
+
+/* Speech Input Style
+-------------------------------------------------- */
+.speech {
+  margin-bottom: 10px;
+}
+.mic-button {
+  font-size: 2em;
+  color: white;
+  background-color: #FA2D4B;
+  width: 50px;
+  text-align: center;
+}
+
+.mic-icon {
+  background-color: transparent;
+}
+
+.sentiment {
+  background-color: transparent;
+}

@@ -8,3 +8,6 @@ dbLocalConnection.js
 data
 .env
 data
+logfile
+keyFile.json
+

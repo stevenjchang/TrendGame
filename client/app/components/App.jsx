@@ -115,7 +115,6 @@ class App extends React.Component {
    getUserSearchHistory() {
     axios.get('/api/history/user')
     .then(response => {
-      console.log('!!!!RESPONSE FROM GET USER HISTORY', response)
       this.setState({
         userHistory: response.data
       });

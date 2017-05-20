@@ -18,7 +18,6 @@ const IP = process.env.HOST;
 const PORT = process.env.PORT;
 
 
-
 app.use(express.static(__dirname + '/client/public'));
 app.use(bodyParser.json());
 
@@ -67,7 +66,6 @@ app.get('/auth/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/' }),
       (req, res) => {
-        console.log('USER FROM CALLBACK:', req.user)
         req.session.user = req.user;
         res.redirect('/');
   });
@@ -123,7 +121,6 @@ app.get('/api/articles', (req, res) => {
 
 app.post('/api/history', (req, res) => {
   let trend = req.body.search;
-  console.log('REQ.SESSION.USER WHEN LOGGED OUT', req.session.user)
   let userId;
   if (req.session.user === undefined) {
     userId = null;

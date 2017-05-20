@@ -15,8 +15,8 @@ class Body extends React.Component {
   render() {
     return (
       <div className="row">
-        {this.props.loggedIn ? <div>Welcome Back! <a href="/logout">Logout</a></div> : <GoogleSignIn />}
       <div className="col col-m-10 offset-m-1 col-lg-8 offset-lg-2">
+        {this.props.loggedIn ? <div>Welcome Back! <a href="/logout">Logout</a></div> : <GoogleSignIn />}
         <Input 
           collectData={this.props.collectData}
           addStart={this.props.addStart}

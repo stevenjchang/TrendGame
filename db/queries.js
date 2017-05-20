@@ -4,7 +4,6 @@ const findUnique = require('../utilities/findUnique');
 const findUser = (googleID, callback) => {
   db('users').where('googleID', googleID)
     .then(response => {
-      console.log('FIND USER QUERY RESPONSE:', response)
       callback(null, response);
     })
     .catch(error => {
@@ -26,9 +25,7 @@ const addUser = (name, googleID, token, photo, callback) => {
 
 //modify to accept user id
 const insertSearch = (searchString, userId, callback) => {
-  console.log('INSERTSEARCH SEARCHSTRING:', searchString);
-  console.log('INSERT SEARCH USER ID', userId);
-  db('trends').insert({name: searchString, userId: userId}).then((resp) => {
+  db('trends').insert({name: searchString, user_id: userId}).then((resp) => {
     callback(null, resp);
   }).catch((err) => {
     callback(err, null);
@@ -58,7 +55,6 @@ const getUserSearches = (numberOfSearches, userId, callback) => {
       callback(error, null);
     })
 }
-
 
 module.exports.insertSearch = insertSearch;
 module.exports.getSearches = getSearches;

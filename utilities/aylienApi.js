@@ -55,10 +55,8 @@ exports.getStoriesForOneDay = (queryString, date, scope, callback) => {
   const peakDate = new Date(date);
   const peakEndDate = new Date(date);
   peakEndDate.setDate(peakEndDate.getDate() + 1);
-  console.log("1", peakDate, "2", peakEndDate);
   let formattedPeakDate = epoch(peakDate).format('YYYY[-]MM[-]DD[T]hh[:]mm[:]ss[Z]');
   let formattedPeakEndDate = epoch(peakEndDate).format('YYYY[-]MM[-]DD[T]hh[:]mm[:]ss[Z]');
-  console.log(formattedPeakDate, formattedPeakEndDate);
   // Establish API instance and supply credentials
   const apiInstance = new AylienNewsApi.DefaultApi();
 

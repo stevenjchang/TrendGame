@@ -8,6 +8,8 @@ DB_NAME=trendGame
 PORT=8080
 HOST=localhost
 
+AYLIEN_TEXT_ID=xxxxx
+AYLIEN_TEXT_KEY=somekeyhere
 ROOT_URL=http://127.0.0.1:8080
 
 GOOGLE_CLIENT_ID=clientId

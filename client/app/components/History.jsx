@@ -2,7 +2,6 @@ import React from 'react';
 import HistoryItem from './HistoryItem';
 
 const History = ({ history, userHistory, collectData, loggedIn}) => {
-  {console.log('LOGGED IN STATE:', loggedIn)}
   return (
     <div className="row mb-5">
 
