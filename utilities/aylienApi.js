@@ -37,7 +37,6 @@ exports.getNews = (queryString, peaks, scope, callback) => {
 
   apiInstance.listStories(opts, (error, data, response) => {
     if (error) {
-      console.log('ERROR: ', error)
       callback(error, null);
     } else {
       const formattedStories = formatStories(data);
@@ -83,7 +82,6 @@ exports.getStoriesForOneDay = (queryString, date, scope, callback) => {
 
   apiInstance.listStories(opts, (error, data, response) => {
     if (error) {
-      console.log('ERROR: ', error)
       callback(error, null);
     } else {
       const formattedStories = formatStories(data);

@@ -19,7 +19,9 @@ class App extends React.Component {
       storyPoint: {},
       loader: false,
       history: [],
-      selectedDate: null
+      userHistory: [],
+      selectedDate: null,
+      loggedIn: false
     };
     this.collectData = this.collectData.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -35,6 +37,13 @@ class App extends React.Component {
     this.getSearchHistory();
     if (cookies.get('loggedIn') === 'true') {
       this.getUserSearchHistory();
+    }
+    this.loggedIn();
+  }
+
+  loggedIn() {
+    if (cookies.get('loggedIn') === 'true') {
+      this.setState({loggedIn: !this.state.loggedIn})
     }
   }
 
@@ -180,6 +189,7 @@ class App extends React.Component {
         trend={this.state.trend}
         getChartClick={this.handleChartClick}
         selectedDate={this.state.selectedDate}
+        loggedIn={this.state.loggedIn}
       />
     );
   }

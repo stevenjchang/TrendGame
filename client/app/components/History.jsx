@@ -1,7 +1,7 @@
 import React from 'react';
 import HistoryItem from './HistoryItem';
 
-const History = ({ history, userHistory, collectData }) => {
+const History = ({ history, userHistory, collectData, loggedIn}) => {
   return (
     <div className="row mb-5">
 
@@ -13,17 +13,20 @@ const History = ({ history, userHistory, collectData }) => {
           })}
         </ul>
       </div>
-
+      {loggedIn ? 
       <div className="col text-center">
         <small>My searches</small>
         <ul className="list-inline text-center text-muted">
           {userHistory === undefined ? 
             <div></div> : 
             userHistory.map((term, index) => {
-            return <HistoryItem key={term} term={term.name} index={index} collectData={collectData}/>;
+            return <HistoryItem key={term.name} term={term.name} index={index} collectData={collectData}/>;
           })}
         </ul>
       </div>
+      :
+      <div>USER NOT SIGNED IN</div>
+      }
     </div>
   );
 };

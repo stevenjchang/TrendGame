@@ -35,7 +35,6 @@ module.exports = (trend, startTime, endTime, callback) => {
       callback(null, sanitizeTrend(response.data))
     })
     .catch(error => {
-      console.log('you got and error from scotts app: ', error)
       callback(error, null);
     })
 

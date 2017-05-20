@@ -11,8 +11,9 @@ const findUser = (googleID, callback) => {
     })
 }
 
-const addUser = (name, googleID, token, callback) => {
-  db('users').insert({name: name, googleID: googleID, token: token})
+//add image url 
+const addUser = (name, googleID, token, photo, callback) => {
+  db('users').insert({name: name, googleID: googleID, token: token, photo: photo})
     .then(response => {
       callback(null, response);
     })
@@ -32,9 +33,8 @@ const insertSearch = (searchString, userId, callback) => {
 };
 
 const getSearches = (numberOfSearches, userId, callback) => {
-  db.select('name').from('trends').then((data) => {
-  // db('trends').whereNot('userId', userId).then(data => {
-    let dataNoDups = findUnique(data);
+  db.raw(`SELECT name FROM trends WHERE "userId" !=3 OR "userId" IS NULL`).then(data => {
+    let dataNoDups = findUnique(data.rows);
     let dataSlice = dataNoDups.slice(0, numberOfSearches);
     let dataClean = dataSlice.map((search) => {
       return search.name;
@@ -55,7 +55,6 @@ const getUserSearches = (numberOfSearches, userId, callback) => {
       callback(error, null);
     })
 }
-
 
 module.exports.insertSearch = insertSearch;
 module.exports.getSearches = getSearches;

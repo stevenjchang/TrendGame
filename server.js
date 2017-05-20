@@ -58,7 +58,7 @@ app.get('/', (req, res, next) => {
 // signup or login
 app.get('/auth/google', 
   passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/plus.login']
+    scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.profile']
   }
 ));
 
@@ -159,7 +159,6 @@ app.get('/api/history', (req, res) => {
 });
 
 app.get('/api/history/user', (req, res) => {
-  // res.send(['query1', 'query2', 'query3'])
   let userId = req.session.user[0].id;
   queries.getUserSearches(10, userId, (err, data) => {
     if (err) {
