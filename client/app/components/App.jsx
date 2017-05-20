@@ -20,7 +20,7 @@ class App extends React.Component {
       loader: false,
       history: [],
       userHistory: [],
-      userInfo: {},
+      userInfo: [],
       selectedDate: null,
       loggedIn: false
     };
@@ -38,21 +38,20 @@ class App extends React.Component {
     }
     this.getSearchHistory();
     if (cookies.get('loggedIn') === 'true') {
+      this.getUserInfo();
       this.getUserSearchHistory();
     }
   }
 
   getUserInfo() {
     axios.get('/api/user')
-    .then(response => {
-      this.setState({userInfo: response.data})
-    })
-    .catch(err => {
-      console.log(err);
-    })
+      .then(response => {
+        this.setState({userInfo: response.data})
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
-
- 
 
   collectData(trend, startTime, endTime) {
     this.setState({
@@ -188,6 +187,7 @@ class App extends React.Component {
   }
 
   render () {
+    console.log('USER INFO FROM APP.JSX : ', this.state.userInfo)
     return (
       <Layout
         addStart={this.handleStartDateChange}
@@ -201,7 +201,7 @@ class App extends React.Component {
         trend={this.state.trend}
         getChartClick={this.handleChartClick}
         selectedDate={this.state.selectedDate}
-        loggedIn={this.state.loggedIn}
+        userInfo={this.state.userInfo}
       />
     );
   }

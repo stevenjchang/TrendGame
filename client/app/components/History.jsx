@@ -22,7 +22,7 @@ const History = ({ history, userHistory, collectData}) => {
           {userHistory === undefined ? 
             <div></div> : 
             userHistory.map((term, index) => {
-            return <HistoryItem key={term.name} term={term.name} index={index} collectData={collectData}/>;
+            return <HistoryItem key={term} term={term} index={index} collectData={collectData}/>;
           })}
         </ul>
       </div>
