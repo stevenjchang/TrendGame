@@ -6,7 +6,7 @@ const pg = require('pg');
 
 let configs = {
     host: 'localhost',
-    user: 'joshuastagner',
+    user: 'yujin',
     password: '',
     database: 'trendgame'
   }
