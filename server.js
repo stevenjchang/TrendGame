@@ -179,6 +179,18 @@ app.get('/api/history/user', (req, res) => {
   });
 });
 
+app.get('/api/favorite/user', (req, res) => {
+  let userId = req.session.user[0].id;
+  let trend = req.body.name;
+  queries.getToggleFavorite(trend, userId, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.send(200).send(data);
+    }
+  });
+});
+
 app.get('/api/worker', (req, res) => {
   res.send("Im awake!!");
 });
