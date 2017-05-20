@@ -65,7 +65,6 @@ const getUserSearches = (numberOfSearches, userId, callback) => {
     })
 }
 
-
 const getUserInfo = (userId, callback) => {
   db.select('name', 'photo').where('userId', userId).from('users')
     .then(data => {
@@ -76,6 +75,17 @@ const getUserInfo = (userId, callback) => {
     })
 }
 
+const getIsFavored = (trend, userId, callback) => {
+  db.select('isFavored').where('userID', userId).from('trends')
+    .then( data => 
+      db.update('isFavored', !data).where('userId', userId).from('trends'))
+      .then( data => {
+        callback(null, data);
+      })
+      .catch( error => {
+        callback(error, null);
+      })
+}
 
 module.exports.insertSearch = insertSearch;
 module.exports.getSearches = getSearches;
