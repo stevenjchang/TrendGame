@@ -47,11 +47,6 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/', (req, res, next) => {
-  
-  if (req.session.user) {
-    let user = req.session.user[0];
-    res.cookie('loggedIn', true, {path: '/'});
-  }
   res.sendFile(__dirname + '/client/public/_index.html')
 });
 
@@ -67,7 +62,10 @@ app.get('/auth/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/' }),
       (req, res) => {
+        console.log('response after coming back from google signin: ', req.user);
+        res.cookie('loggedIn', true, {path: '/'});
         req.session.user = req.user;
+        
         res.redirect('/');
   });
 
@@ -156,6 +154,7 @@ app.post('/api/history', (req, res) => {
 
 app.get('/api/history', (req, res) => {
   let userId = 0;
+  console.log(req.session)
   if (req.session.user) {
     userId = req.session.user[0].id 
   }

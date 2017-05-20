@@ -32,6 +32,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+      console.log(this.props.match)
     if (this.props.match.params.searchterm) {
       this.setState({trend: this.props.match.params.searchterm.split('+').join(' ')})
       this.collectData(this.props.match.params.searchterm.split('+').join(' '));
