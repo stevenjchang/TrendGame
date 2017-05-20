@@ -36,7 +36,6 @@ db.schema.hasTable('trends').then(function (exists) {
       trend.string('name');
       trend.timestamps(true, true);
       trend.integer('userId');
-      // trend.foreign('userId').references('id').inTable('users');
     }).then(function (table) {
       console.log('Created Table trends');
     });
