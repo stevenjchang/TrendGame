@@ -133,7 +133,9 @@ class App extends React.Component {
       search: trend
     }).then(response => {
       this.getSearchHistory();
-      this.getUserSearchHistory();
+      if (cookies.get('loggedIn') === 'true') {
+        this.getUserSearchHistory();
+      }
     }).catch(err => {
       console.log(err);
     });
