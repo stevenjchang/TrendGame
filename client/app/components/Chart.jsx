@@ -40,7 +40,7 @@ class TrendChart extends React.Component {
               setTrend={this.props.setTrend}
             />
           </div>
-          <h2 className="h4 mb-4">
+          <h2 className="h4 mb-4 chart-title">
             <strong>When</strong> did interest in <strong className="text-lowercase">{trend}</strong> peak? <strong>{this.props.storyPoint.formattedAxisTime}</strong>
           </h2>
           <Chart
