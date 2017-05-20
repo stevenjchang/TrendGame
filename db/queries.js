@@ -65,21 +65,9 @@ const getUserSearches = (numberOfSearches, userId, callback) => {
 }
 
 
-const getUserInfo = (userId, callback) => {
-  db.select('name', 'photo').where('userId', userId).from('users')
-    .then(data => {
-      console.log('data from getUserInfo! :', data)
-      callback(null, data);
-    })
-    .catch(error => {
-      callback(error, null);
-    })
-}
-
-
 module.exports.insertSearch = insertSearch;
 module.exports.getSearches = getSearches;
 module.exports.findUser = findUser;
 module.exports.addUser = addUser;
 module.exports.getUserSearches = getUserSearches;
-module.exports.getUserInfo = getUserInfo;
+
