@@ -23,6 +23,7 @@ const addUser = (name, googleID, token, photo, callback) => {
     });
 }
 
+
 //modify to accept user id
 const insertSearch = (searchString, userId, callback) => {
   db('trends').insert({name: searchString, userId: userId}).then((resp) => {
@@ -56,14 +57,25 @@ const getSearches = (numberOfSearches, userId, callback) => {
 const getUserSearches = (numberOfSearches, userId, callback) => {
   // db('trends').where('userId', userId)
   db.select('name').where('userId', userId).from('trends')
-    .then( data => {
-      
+    .then( data => {      
       callback(null, data);
     })
     .catch( error => {
       callback(error, null);
     })
 }
+
+
+const getUserInfo = (userId, callback) => {
+  db.select('name', 'photo').where('userId', userId).from('users')
+    .then(data => {
+      callback(null, data);
+    })
+    .catch(error => {
+      callback(error, null);
+    })
+}
+
 
 module.exports.insertSearch = insertSearch;
 module.exports.getSearches = getSearches;
