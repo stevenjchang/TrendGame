@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const BearerStrategy = require('passport-http-bearer');
 const queries = require('../db/queries');
 
-//modify to 
+
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
