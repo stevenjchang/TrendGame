@@ -147,7 +147,6 @@ app.post('/api/history', (req, res) => {
 
 app.get('/api/history', (req, res) => {
   let userId = 0;
-  console.log(req.session)
   if (req.session.user) {
     userId = req.session.user[0].id 
   }
@@ -162,6 +161,7 @@ app.get('/api/history', (req, res) => {
 
 app.get('/api/history/user', (req, res) => {
   let userId = req.session.user[0].id;
+  console.log('USER ID FROM GET:', userId)
   queries.getUserSearches(10, userId, (err, data) => {
     if (err) {
       res.status(500).send(err);
