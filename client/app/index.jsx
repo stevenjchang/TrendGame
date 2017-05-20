@@ -13,7 +13,7 @@ class BoltOnRouter extends React.Component {
       <Router>
         <Switch>
           <Route path=':searchterm' component={App} />
-          <Route path='http://trendzilla.herokuapp.com' component={App} />
+          <Route path='/' component={App} />
         </Switch>
       </Router>
     )

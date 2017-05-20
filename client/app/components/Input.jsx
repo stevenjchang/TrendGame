@@ -40,7 +40,7 @@ export default class Input extends React.Component {
 
     document.querySelector('.search-input').blur();
     this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
-    window.location.href = 'http://127.0.0.1:8080/#/' + this.state.trend.split(' ').join('+');
+    window.location.href = process.env.HOST + '/#/' + this.state.trend.split(' ').join('+');
   }
 
   startDictation() {
