@@ -47,7 +47,9 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/', (req, res, next) => {
+  
   if (req.session.user) {
+    let user = req.session.user[0];
     res.cookie('loggedIn', true, {path: '/'});
   }
   res.sendFile(__dirname + '/client/public/_index.html')
@@ -110,6 +112,17 @@ app.get('/api/articles', (req, res) => {
   trend = cleanData.prepForAylien(trend);
 
   makeArticles(trend, date, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+})
+
+app.get('/api/user', (req, res) => {
+  let userId = req.session.user[0].id
+  queries.getUserInfo(userId, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
