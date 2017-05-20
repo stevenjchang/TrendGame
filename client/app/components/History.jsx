@@ -2,13 +2,11 @@ import React from 'react';
 import HistoryItem from './HistoryItem';
 import Cookies from 'universal-cookie';
 
-
 const cookies = new Cookies();
 
 const History = ({ history, userHistory, collectData}) => {
   return (
     <div className="row mb-5">
-
       <div className="col text-center">
         <small>Recent searches</small>
         <ul className="list-inline text-center text-muted">
@@ -17,7 +15,7 @@ const History = ({ history, userHistory, collectData}) => {
           })}
         </ul>
       </div>
-      {  (cookies.get('loggedIn') === 'true') ?
+      { (cookies.get('loggedIn') === 'true') ?
       <div className="col text-center">
         <small>My searches</small>
         <ul className="list-inline text-center text-muted">
