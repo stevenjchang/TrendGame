@@ -177,7 +177,6 @@ class App extends React.Component {
   }
   
   render () {
-    console.log('this.state.history', this.state.history)
     return (
       <Layout
         addStart={this.handleStartDateChange}
