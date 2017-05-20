@@ -7,7 +7,7 @@ const queries = require('../db/queries');
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://127.0.0.1:8080/auth/google/callback"
+  callbackURL: process.env.GOOGLE_CALLBACKURL
   },
   (accessToken, refreshToken, profile, done) => {
     process.nextTick(() => {
