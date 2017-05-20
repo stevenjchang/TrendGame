@@ -2,11 +2,18 @@
 // This file should be run once from the command line to initialize the db schema.  Be sure to edit the url const with the target url.
 const pg = require('pg');
 
-const url = 'postgres://liqoudqyciuxfv:2180483673ffe302e126b458287cfb26c833479816589cb3b9e41c6d9ec9c717@ec2-184-73-236-170.compute-1.amazonaws.com:5432/deb9kpg1d0je75' + '?ssl=true';
+// const url = 'postgres://liqoudqyciuxfv:2180483673ffe302e126b458287cfb26c833479816589cb3b9e41c6d9ec9c717@ec2-184-73-236-170.compute-1.amazonaws.com:5432/deb9kpg1d0je75' + '?ssl=true';
+
+let configs = {
+    host: 'localhost',
+    user: 'joshuastagner',
+    password: '',
+    database: 'trendgame'
+  }
 
 var db = require('knex')({
   client: 'pg',
-  connection: url
+  connection: configs
 });
 
 db.schema.hasTable('users').then(exists => {
