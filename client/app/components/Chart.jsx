@@ -33,6 +33,13 @@ class TrendChart extends React.Component {
     } else {
       displayChart = (
         <span>
+          <div>
+            <DateSelector 
+              trend={this.props.trend}
+              collectData={this.props.collectData}
+              setTrend={this.props.setTrend}
+            />
+          </div>
           <h2 className="h4 mb-4">
             <strong>When</strong> did interest in <strong className="text-lowercase">{trend}</strong> peak? <strong>{this.props.storyPoint.formattedAxisTime}</strong>
           </h2>
@@ -60,13 +67,6 @@ class TrendChart extends React.Component {
     }
     return (
       <div>
-        <div>
-          <DateSelector 
-            trend={this.props.trend}
-            collectData={this.props.collectData}
-            setTrend={this.props.setTrend}
-          />
-        </div>
         <div className="row mb-5">
           <div className="col">
             {displayChart}

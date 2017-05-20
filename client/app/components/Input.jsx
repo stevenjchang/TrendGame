@@ -14,7 +14,8 @@ export default class Input extends React.Component {
       displayTrend: '',
       startTime: '',
       endTime: '',
-      listening: false
+      listening: false,
+      trend: ''
     };
     this.handeInput = this.handeInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,11 +37,11 @@ export default class Input extends React.Component {
     }
 
     this.props.setTrend(this.state.trend, null);
-    this.setState({trend: ''});
 
     document.querySelector('.search-input').blur();
     this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
     window.location.href = '/#' + this.state.trend.split(' ').join('+');
+    this.setState({trend: ''});
   }
 
   startDictation() {
