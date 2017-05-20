@@ -20,6 +20,7 @@ class App extends React.Component {
       loader: false,
       history: [],
       userHistory: [],
+      userInfo: {},
       selectedDate: null,
       loggedIn: false
     };
@@ -38,14 +39,19 @@ class App extends React.Component {
     if (cookies.get('loggedIn') === 'true') {
       this.getUserSearchHistory();
     }
-    this.loggedIn();
   }
 
-  loggedIn() {
-    if (cookies.get('loggedIn') === 'true') {
-      this.setState({loggedIn: !this.state.loggedIn})
-    }
+  getUserInfo() {
+    axios.get('/api/user')
+    .then(response => {
+      this.setState({userInfo: response.data})
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
+
+ 
 
   collectData(trend, startTime, endTime) {
     this.setState({
@@ -112,7 +118,7 @@ class App extends React.Component {
     });
   }
 
-   getUserSearchHistory() {
+  getUserSearchHistory() {
     axios.get('/api/history/user')
     .then(response => {
       this.setState({
@@ -126,6 +132,7 @@ class App extends React.Component {
       search: trend
     }).then(response => {
       this.getSearchHistory();
+      this.getUserSearchHistory();
     }).catch(err => {
       console.log(err);
     });

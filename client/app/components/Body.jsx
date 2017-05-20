@@ -13,10 +13,16 @@ class Body extends React.Component {
     super(props);
   }
   render() {
+    let loggedIn;
+    if (cookies.get('loggedIn') === 'true') {
+      loggedIn = <div>Welcome Back! <a href="/logout">Logout</a></div>
+    } else {
+      loggedIn = <GoogleSignIn />
+    }
     return (
       <div className="row">
       <div className="col col-m-10 offset-m-1 col-lg-8 offset-lg-2">
-        {this.props.loggedIn ? <div>Welcome Back! <a href="/logout">Logout</a></div> : <GoogleSignIn />}
+         {loggedIn}
         <Input 
           collectData={this.props.collectData}
           addStart={this.props.addStart}
@@ -24,7 +30,7 @@ class Body extends React.Component {
           setTrend={this.props.setTrend}
           trend={this.props.trend}
         />
-        <History history={this.props.history} userHistory={this.props.userHistory} collectData={this.props.collectData} loggedIn={this.props.loggedIn}/>
+        <History history={this.props.history} userHistory={this.props.userHistory} collectData={this.props.collectData} />
         <TrendChart getChartClick={this.props.getChartClick} chartData={this.props.chartData} storyPoint={this.props.storyPoint}/>
         <ArticleList selectedDate={this.props.selectedDate} trend={this.props.chartData.trend} storyPoint={this.props.storyPoint}/>
       </div>
