@@ -149,3 +149,31 @@ a.card-clickable:hover div.card {
   padding-top: 20px;
   clear: both;
 }
+
+/* Header
+-------------------------------------------------- */
+
+.welcome {
+  float: left;
+  padding-bottom: 50px;
+}
+
+
+.user-image {
+  border-radius: 50%;
+  width: 60px;
+  padding-left: 10px;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.logout {
+ float: right;
+ padding-top: 15px;
+}
