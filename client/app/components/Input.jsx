@@ -14,7 +14,8 @@ export default class Input extends React.Component {
       displayTrend: '',
       startTime: '',
       endTime: '',
-      listening: false
+      listening: false,
+      trend: ''
     };
     this.handeInput = this.handeInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,8 +35,10 @@ export default class Input extends React.Component {
     if(e){
       e.preventDefault();
     }
+
     var theSearch = this.state.trend;
     this.props.setTrend(theSearch, null);
+
 
     document.querySelector('.search-input').blur();
     this.props.collectData(theSearch, this.state.startTime, this.state.endTime)
@@ -44,7 +47,6 @@ export default class Input extends React.Component {
   }
 
   startDictation() {
-    console.log("started");
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
       this.setState({listening: true});
 

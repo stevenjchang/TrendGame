@@ -62,7 +62,6 @@ app.get('/auth/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/' }),
       (req, res) => {
-        console.log('response after coming back from google signin: ', req.user);
         res.cookie('loggedIn', true, {path: '/'});
         req.session.user = req.user;
         
