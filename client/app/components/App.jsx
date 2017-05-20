@@ -38,14 +38,14 @@ class App extends React.Component {
     if (cookies.get('loggedIn') === 'true') {
       this.getUserSearchHistory();
     }
-    this.loggedIn();
+    // this.loggedIn();
   }
 
-  loggedIn() {
-    if (cookies.get('loggedIn') === 'true') {
-      this.setState({loggedIn: !this.state.loggedIn})
-    }
-  }
+  // loggedIn() {
+  //   if (cookies.get('loggedIn') === 'true') {
+  //     this.setState({loggedIn: !this.state.loggedIn})
+  //   }
+  // }
 
   collectData(trend, startTime, endTime) {
     this.setState({
@@ -126,6 +126,7 @@ class App extends React.Component {
       search: trend
     }).then(response => {
       this.getSearchHistory();
+      this.getUserSearchHistory();
     }).catch(err => {
       console.log(err);
     });
@@ -176,6 +177,7 @@ class App extends React.Component {
   }
   
   render () {
+    console.log('this.state.history', this.state.history)
     return (
       <Layout
         addStart={this.handleStartDateChange}
