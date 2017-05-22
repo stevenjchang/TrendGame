@@ -14,6 +14,7 @@ var textapi = new AYLIENTextAPI({
 
 const getSentiment = (array, done) => {
   if(array.length === 0) {
+    console.log("Finished!")
     done();
     return;
   }
@@ -53,6 +54,7 @@ const makeArticles = (trend, date, callback) => {
     } else {
       let theStories = peakStories[0].stories.slice();
       getSentiment(theStories, () => {
+        console.log(peakStories[0].stories[0]);
         callback(null, peakStories);
       })
       // const response = makeFinalArticleData(timeSeries, peakStories, trend);
