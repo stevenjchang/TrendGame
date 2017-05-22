@@ -75,16 +75,17 @@ const getUserInfo = (userId, callback) => {
     })
 }
 
-const getToggleFavorite = (trend, userId, callback) => {
-  db.select('isFavored').where('userID', userId).from('trends')
-    .then( data => 
-      db.update('isFavored', !data).where('userId', userId).from('trends'))
-      .then( data => {
-        callback(null, data);
-      })
-      .catch( error => {
-        callback(error, null);
-      })
+const getValueOfFavorite = (trend, userId, callback) => {
+  // SELECT favorite FROM trends where name = 'google' AND "userId" = 1;
+  db.select('favorite').where('userId', userId).andWhere('name', trend).from('trends')
+    .then(response => {
+      callback(null, response);
+    })
+    .catch( error => {
+      console.log('Error! getValueOfFavorite/queries.js', error);
+      callback(error, null);
+    })
+
 }
 
 module.exports.insertSearch = insertSearch;
@@ -92,3 +93,6 @@ module.exports.getSearches = getSearches;
 module.exports.findUser = findUser;
 module.exports.addUser = addUser;
 module.exports.getUserSearches = getUserSearches;
+module.exports.postToggleFavorite = postToggleFavorite;
+module.exports.getValueOfFavorite = getValueOfFavorite;
+
