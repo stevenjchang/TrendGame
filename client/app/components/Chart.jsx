@@ -1,5 +1,6 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
+import DateSelector from './DateSelector.jsx'
 
 
 class TrendChart extends React.Component {
@@ -32,7 +33,14 @@ class TrendChart extends React.Component {
     } else {
       displayChart = (
         <span>
-          <h2 className="h4 mb-4">
+          <div>
+            <DateSelector 
+              trend={this.props.trend}
+              collectData={this.props.collectData}
+              setTrend={this.props.setTrend}
+            />
+          </div>
+          <h2 className="h4 mb-4 chart-title">
             <strong>When</strong> did interest in <strong className="text-lowercase">{trend}</strong> peak? <strong>{this.props.storyPoint.formattedAxisTime}</strong>
           </h2>
           <Chart
@@ -58,13 +66,14 @@ class TrendChart extends React.Component {
       );
     }
     return (
-      <div className="row mb-5">
-        <div className="col">
-          {displayChart}
+      <div>
+        <div className="row mb-5">
+          <div className="col">
+            {displayChart}
+          </div>
         </div>
-      </div>
+      </div>  
     );
-
   }
 
 }

@@ -96,10 +96,16 @@ a.card-clickable:hover div.card {
 }
 .mic-button {
   font-size: 2em;
-  color: white;
+  color: #f4f4f4;
   background-color: #FA2D4B;
   width: 50px;
   text-align: center;
+  transition: all .2s ease-in-out;
+}
+
+.mic-button:hover {
+  background-color: #ff4965;
+  color: white;
 }
 
 .mic-icon {
@@ -130,6 +136,47 @@ a.card-clickable:hover div.card {
   background-color: #636c72;
 }
 
+.date-input {
+  float: left;
+  padding-right: 30px;
+}
+
+.date-input input {
+  margin-left: 8px;
+}
+
+.chart-title {
+  padding-top: 20px;
+  clear: both;
+}
+
+/* Header
+-------------------------------------------------- */
+
+.welcome {
+  float: left;
+  padding-bottom: 50px;
+}
+
+.user-image {
+  border-radius: 50%;
+  width: 60px;
+  padding-left: 10px;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.logout {
+ float: right;
+ padding-top: 15px;
+}
+
 /* Favorite Icon - Heart
 -------------------------------------------------- */
 
@@ -142,3 +189,4 @@ a.card-clickable:hover div.card {
   font-size: 1.3em;
   color: grey;
 }
+

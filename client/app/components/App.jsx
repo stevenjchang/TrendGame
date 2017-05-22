@@ -20,7 +20,7 @@ class App extends React.Component {
       loader: false,
       history: [],
       userHistory: [],
-      userInfo: {},
+      userInfo: [],
       selectedDate: null,
       loggedIn: false
     };
@@ -33,25 +33,25 @@ class App extends React.Component {
 
   componentDidMount() {
     if (this.props.match.params.searchterm) {
+      this.setState({trend: this.props.match.params.searchterm.split('+').join(' ')})
       this.collectData(this.props.match.params.searchterm.split('+').join(' '));
     }
     this.getSearchHistory();
     if (cookies.get('loggedIn') === 'true') {
+      this.getUserInfo();
       this.getUserSearchHistory();
     }
   }
 
   getUserInfo() {
     axios.get('/api/user')
-    .then(response => {
-      this.setState({userInfo: response.data})
-    })
-    .catch(err => {
-      console.log(err);
-    })
+      .then(response => {
+        this.setState({userInfo: response.data})
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
-
- 
 
   collectData(trend, startTime, endTime) {
     this.setState({
@@ -132,7 +132,9 @@ class App extends React.Component {
       search: trend
     }).then(response => {
       this.getSearchHistory();
-      this.getUserSearchHistory();
+      if (cookies.get('loggedIn') === 'true') {
+        this.getUserSearchHistory();
+      }
     }).catch(err => {
       console.log(err);
     });
@@ -150,10 +152,12 @@ class App extends React.Component {
     });
   }
 
-  setTrend(trend) {
-    this.setState({trend: trend}, () => {
-      collectData(this.state.trend, this.state.start, this.state.end)
-    })
+  setTrend(trend, callback) {
+    if (callback) {
+      this.setState({trend: trend}, callback())
+    } else {
+      this.setState({trend: trend});
+    }
   }
   
   handleChartClick(date) {
@@ -181,8 +185,9 @@ class App extends React.Component {
       this.setState({'storyPoint': []});
     })
   }
-  
+
   render () {
+    console.log('USER INFO FROM APP.JSX : ', this.state.userInfo)
     return (
       <Layout
         addStart={this.handleStartDateChange}
@@ -196,7 +201,7 @@ class App extends React.Component {
         trend={this.state.trend}
         getChartClick={this.handleChartClick}
         selectedDate={this.state.selectedDate}
-        loggedIn={this.state.loggedIn}
+        userInfo={this.state.userInfo}
       />
     );
   }

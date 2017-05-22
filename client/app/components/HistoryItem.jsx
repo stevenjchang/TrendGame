@@ -14,7 +14,7 @@ const HistoryItem = ({ term, index, collectData, displayFavorite }) => {
   let element = index === 0
     ? (
         <li className="list-inline-item">
-          <a href={'/#/' + term} className="text-muted" onClick={() => collectData(term)}>{term}</a>
+          <a href={'/#/' + term.split(' ').join('+')} className="text-muted" onClick={() => collectData(term)}>{term}</a>
           &nbsp;          
           {showFavoriteButton}          
         </li>
