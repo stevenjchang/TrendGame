@@ -37,10 +37,10 @@ const getSearches = (numberOfSearches, userId, callback) => {
   let query; 
   if (userId === 0) {
     //select all names from trends, both null and not null userId column values
-    query = 'SELECT name FROM trends WHERE "userId" > 0 OR "userId" IS NULL'
+    query = 'SELECT name FROM trends WHERE "userId" > 0 OR "userId" IS NULL ORDER BY id'
   } else {
     //select all names where userId does not equal passed in userId and all null values
-    query = 'SELECT name FROM trends WHERE "userId" !=' + userId + 'OR "userId" IS NULL'
+    query = 'SELECT name FROM trends WHERE "userId" !=' + userId + 'OR "userId" IS NULL ORDER BY id'
   } 
    db.raw(query).then(data => {
     let dataNoDups = findUnique(data.rows);
