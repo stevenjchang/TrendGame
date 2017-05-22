@@ -131,7 +131,7 @@ app.get('/api/user', (req, res) => {
 
 app.post('/api/history', (req, res) => {
   let trend = req.body.search;
-  let userId;
+  let userId = 0;
   if (req.session.user === undefined) {
     userId = null;
   } else {
