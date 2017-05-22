@@ -38,6 +38,7 @@ db.schema.hasTable('trends').then(function (exists) {
       trend.string('name');
       trend.timestamps(true, true);
       trend.integer('userId');
+      trend.boolean('favorite').defaultTo('false');
     }).then(function (table) {
       console.log('Created Table trends');
     });
@@ -73,5 +74,3 @@ db.schema.hasTable('stories').then(function (exists) {
     });
   }
 });
-
-

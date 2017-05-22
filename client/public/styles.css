@@ -158,7 +158,6 @@ a.card-clickable:hover div.card {
   padding-bottom: 50px;
 }
 
-
 .user-image {
   border-radius: 50%;
   width: 60px;
@@ -177,3 +176,17 @@ a.card-clickable:hover div.card {
  float: right;
  padding-top: 15px;
 }
+
+/* Favorite Icon - Heart
+-------------------------------------------------- */
+
+.favorite-on {
+  font-size: 1.5em;
+  color: #e2264d;
+}
+
+.favorite-off {
+  font-size: 1.3em;
+  color: grey;
+}
+
