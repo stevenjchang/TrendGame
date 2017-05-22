@@ -1,6 +1,5 @@
 var db = require('./config');
 const findUnique = require('../utilities/findUnique');
-const _ = require('lodash');
 
 const findUser = (googleID, callback) => {
   db('users').where('googleID', googleID)
@@ -19,6 +18,7 @@ const addUser = (name, googleID, token, photo, callback) => {
       callback(null, response);
     })
     .catch(error => {
+      console.error('error from addUser:', error)
       callback(error);
     });
 }
@@ -43,7 +43,6 @@ const getSearches = (numberOfSearches, userId, callback) => {
     query = 'SELECT name FROM trends WHERE "userId" !=' + userId + 'OR "userId" IS NULL ORDER BY id'
   } 
    db.raw(query).then(data => {
-     console.log('get ALL searches data: ', data)
     let dataNoDups = findUnique(data.rows);
     let dataSlice = dataNoDups.slice(0, numberOfSearches);
     let dataClean = dataSlice.map((search) => {
@@ -56,13 +55,10 @@ const getSearches = (numberOfSearches, userId, callback) => {
 };
 
 const getUserSearches = (numberOfSearches, userId, callback) => {
-
-  db.select('name').where('userId', userId).from('trends').then( data => {    
-   let dataClean = data.map(search => {
-     return search.name
-   })
-   console.log('DATA CLEAN :', dataClean)
-    callback(null, _.uniqBy(dataClean));
+  // db('trends').where('userId', userId)
+  db.select('name').where('userId', userId).from('trends').orderBy('id', 'desc')
+    .then( data => {      
+      callback(null, data);
     })
     .catch( error => {
       callback(error, null);
@@ -102,6 +98,7 @@ const getValueOfFavorite = (trend, userId, callback) => {
       console.log('Error! getValueOfFavorite/queries.js', error);
       callback(error, null);
     })
+
 }
 
 module.exports.insertSearch = insertSearch;
