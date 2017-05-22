@@ -133,27 +133,14 @@ a.card-clickable:hover div.card {
 /* Favorite Icon - Heart
 -------------------------------------------------- */
 
-/*[id='toggle-heart'] {
-  position: absolute;
-  left: -100vw;
-}*/
-
-[for='toggle-heart'] {
-  color: #aab8c2;
-}
-
-[id='toggle-heart']:checked + label {
+.favorite-on {
+  font-size: 1.5em;
   color: #e2264d;
 }
 
-[for='toggle-heart'] {
-  font-size: 2em;
-  cursor: pointer;
+.favorite-off {
+  font-size: 1.3em;
+  color: grey;
 }
 
-@keyframes heart { 0%, 17.5% { font-size: 0; } }
 
-[id='toggle-heart']:checked + label {
-  will-change: font-size;
-  animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
-}
