@@ -75,6 +75,19 @@ const getUserInfo = (userId, callback) => {
     })
 }
 
+const postToggleFavorite = (trend, userId, callback) => {
+  let query;
+  query = 'UPDATE trends SET favorite = NOT favorite WHERE "userId" = ' + userId + ' AND name = ' + "'" + trend + "'";
+  db.raw(query)
+    .then(success => {
+      callback(null, success);
+    })
+    .catch(error => {
+      console.log('error! postToggleFavorite/queries.js ');
+      callback(error, null);
+    })
+}
+
 const getValueOfFavorite = (trend, userId, callback) => {
   // SELECT favorite FROM trends where name = 'google' AND "userId" = 1;
   db.select('favorite').where('userId', userId).andWhere('name', trend).from('trends')
