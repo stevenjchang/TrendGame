@@ -17,11 +17,11 @@ class Article extends React.Component {
 
     if(theSentiment) {
       if(theSentiment.polarity === 'negative'){
-        theSentiment = <i className="fa fa-frown-o pull-right sentiment" aria-hidden="true"></i>
+        theSentiment = <div className="sentiment-box bad pull-right"><i className="fa fa-frown-o sentiment" aria-hidden="true"></i></div>
       } else if (theSentiment.polarity === 'neutral') {
-        theSentiment = <i className="fa fa-meh-o pull-right sentiment" aria-hidden="true"></i>
+        theSentiment = <div className="sentiment-box neutral pull-right"><i className="fa fa-meh-o sentiment" aria-hidden="true"></i></div>
       } else if (theSentiment.polarity === 'positive') {
-        theSentiment = <i className="fa fa-smile-o pull-right sentiment" aria-hidden="true"></i>
+        theSentiment = <div className="sentiment-box good pull-right"><i className="fa fa-smile-o sentiment" aria-hidden="true"></i></div>
       }
     }
     return (

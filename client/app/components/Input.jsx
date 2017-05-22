@@ -4,7 +4,6 @@ import moment from 'moment';
 import backDate from './../../../utilities/backDate.js'
 import { Route, Redirect } from 'react-router'
 
-
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 export default class Input extends React.Component {
@@ -15,7 +14,6 @@ export default class Input extends React.Component {
       startTime: '',
       endTime: '',
       listening: false
-      // theStream: null
     };
     this.handeInput = this.handeInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,15 +27,7 @@ export default class Input extends React.Component {
     this.setState({trend: this.props.trend});
   }
 
-  // componentDidMount() {
-  //   navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-  //   .then(function(stream){
-  //     this.setState({theStream: stream});
-  //   });
-  // }
-
   handeInput(e) {
-    // console.log(window.location + e.target.value)
     this.setState({trend: e.target.value});
   }
 
@@ -45,6 +35,7 @@ export default class Input extends React.Component {
     if(e){
       e.preventDefault();
     }
+
     document.querySelector('.search-input').blur();
     this.props.collectData(this.state.trend, this.state.startTime, this.state.endTime)
     window.location.href = 'http://127.0.0.1:8080/#/' + this.state.trend.split(' ').join('+');
@@ -85,14 +76,12 @@ export default class Input extends React.Component {
         this.handleSubmit();
         recognition.stop();
         this.setState({listening: false});
-        // document.getElementById('the-form').submit();
       };
 
       recognition.onerror = function(e) {
         recognition.stop();
         this.setState({listening: false});
       }
-
     }
   }
 
@@ -100,26 +89,17 @@ export default class Input extends React.Component {
     e.preventDefault();
   }
 
-  // handleStartRecord(e) {
-  //   this.state.theStream
-  // }
-
-  // handleEndRecord(e) {
-  //   console.log("up")
-  // }
-
   render () {
     let micIcon;
     if (this.state.listening) {
-      micIcon = <i className="fa fa-circle-o-notch fa-fw fa-spin mic-icon"></i>
+      micIcon = <i className="fa fa-circle-o-notch fa-fw fa-spin mic-icon"></i>;
     } else {
-      micIcon = <i className="fa fa-microphone fa-fw mic-icon" aria-hidden="true"></i>
+      micIcon = <i className="fa fa-microphone fa-fw mic-icon" aria-hidden="true"></i>;
     }
 
     return (
       <div className="row mb-4">
         <div className="col">
-          {/*<button className="get-audio" onMouseDown={this.handleStartRecord} onMouseUp={this.handleEndRecord}>Hello</button>*/}
           <form 
             id="the-form"
             action="submit"
@@ -162,5 +142,5 @@ export default class Input extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  };
+};

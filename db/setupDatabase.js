@@ -14,8 +14,6 @@ var db = require('knex')({
   }
 });
 
-var test;
-
 db.schema.hasTable('users').then(exists => {
   if (!exists) {
     db.schema.createTable('users', (user) => {
@@ -38,7 +36,7 @@ db.schema.hasTable('trends').then(function (exists) {
       trend.string('name');
       trend.timestamps(true, true);
       trend.integer('userId');
-      // trend.foreign('userId').references('id').inTable('users');
+      trend.boolean('favorite').defaultTo('false');
     }).then(function (table) {
       console.log('Created Table trends');
     });
@@ -74,5 +72,3 @@ db.schema.hasTable('stories').then(function (exists) {
     });
   }
 });
-
-

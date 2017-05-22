@@ -46,10 +46,11 @@ app.get('/api', (req, res) => {
   });
 });
 
-
 app.get('/', (req, res, next) => {
+  
   if (req.session.user) {
-    res.cookie('loggedIn', true);
+    let user = req.session.user[0];
+    res.cookie('loggedIn', true, {path: '/'});
   }
   res.sendFile(__dirname + '/client/public/_index.html')
 });
@@ -79,8 +80,6 @@ app.get('/auth/google/callback',
       }
     })
   });
-
-
 
 app.get('/api/timeline', (req, res) => {
   let trend = req.query.q;
@@ -119,9 +118,20 @@ app.get('/api/articles', (req, res) => {
   });
 })
 
+app.get('/api/user', (req, res) => {
+  let userId = req.session.user[0].id
+  queries.getUserInfo(userId, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+})
+
 app.post('/api/history', (req, res) => {
   let trend = req.body.search;
-  let userId;
+  let userId = 0;
   if (req.session.user === undefined) {
     userId = null;
   } else {
@@ -143,11 +153,9 @@ app.post('/api/history', (req, res) => {
 });
 
 app.get('/api/history', (req, res) => {
-  let userId;
-  if (req.session.user === undefined) {
-    userId = null;
-  } else {
-    userId = req.session.user[0].id
+  let userId = 0;
+  if (req.session.user) {
+    userId = req.session.user[0].id 
   }
   queries.getSearches(10, userId, (err, data) => {
     if (err) {
@@ -159,8 +167,27 @@ app.get('/api/history', (req, res) => {
 });
 
 app.get('/api/history/user', (req, res) => {
-  let userId = req.session.user[0].id;
-  queries.getUserSearches(10, userId, (err, data) => {
+  if (req.session.user) {
+    let userId = req.session.user[0].id;
+    queries.getUserSearches(10, userId, (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  }
+});
+
+app.post('/api/favorite/user', (req, res) => {
+  let userId;
+  if (req.session.user) {
+    console.log('*************** if req.session.user[0].id');
+    userId = req.session.user[0].id;
+  }
+  let trend = req.body.trend ? req.body.trend : 'casper';
+  console.log('userId ->', userId);
+  queries.postToggleFavorite(trend, userId, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -168,6 +195,28 @@ app.get('/api/history/user', (req, res) => {
     }
   });
 });
+
+app.get('/api/favorite/user', (req, res) => {
+    console.log('attempt');
+
+  let userId;
+  if (req.session.user) {
+    userId = req.session.user[0].id;
+  }
+  let trend = req.query.trend ? req.query.trend : 'casper';
+  console.log('userId ->', userId);
+  console.log('trend ->', trend, 'req.query.trend =>', req.query.trend);
+
+  queries.getValueOfFavorite(trend, userId, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+
+  })
+
+})
 
 app.get('/api/worker', (req, res) => {
   res.send("Im awake!!");

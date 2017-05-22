@@ -108,4 +108,37 @@ a.card-clickable:hover div.card {
 
 .sentiment {
   background-color: transparent;
+  color: #f5f5f5;
+  float: right;
+}
+
+.sentiment-box {
+  padding: 2px 3.5px;
+  border-radius: 60px;
+  font-size: 25px;
+}
+
+.sentiment-box.bad {
+  background-color: #f14242;
+}
+
+.sentiment-box.good {
+  background-color: #58CC64;
+}
+
+.sentiment-box.neutral {
+  background-color: #636c72;
+}
+
+/* Favorite Icon - Heart
+-------------------------------------------------- */
+
+.favorite-on {
+  font-size: 1.5em;
+  color: #e2264d;
+}
+
+.favorite-off {
+  font-size: 1.3em;
+  color: grey;
 }
