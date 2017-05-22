@@ -81,8 +81,6 @@ app.get('/auth/google/callback',
     })
   });
 
-
-
 app.get('/api/timeline', (req, res) => {
   let trend = req.query.q;
   let startTime;
@@ -169,8 +167,27 @@ app.get('/api/history', (req, res) => {
 });
 
 app.get('/api/history/user', (req, res) => {
-  let userId = req.session.user[0].id;
-  queries.getUserSearches(10, userId, (err, data) => {
+  if (req.session.user) {
+    let userId = req.session.user[0].id;
+    queries.getUserSearches(10, userId, (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  }
+});
+
+app.post('/api/favorite/user', (req, res) => {
+  let userId;
+  if (req.session.user) {
+    console.log('*************** if req.session.user[0].id');
+    userId = req.session.user[0].id;
+  }
+  let trend = req.body.trend ? req.body.trend : 'casper';
+  console.log('userId ->', userId);
+  queries.postToggleFavorite(trend, userId, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -180,16 +197,26 @@ app.get('/api/history/user', (req, res) => {
 });
 
 app.get('/api/favorite/user', (req, res) => {
-  let userId = req.session.user[0].id;
-  let trend = req.body.name;
-  queries.getToggleFavorite(trend, userId, (err, data) => {
+    console.log('attempt');
+
+  let userId;
+  if (req.session.user) {
+    userId = req.session.user[0].id;
+  }
+  let trend = req.query.trend ? req.query.trend : 'casper';
+  console.log('userId ->', userId);
+  console.log('trend ->', trend, 'req.query.trend =>', req.query.trend);
+
+  queries.getValueOfFavorite(trend, userId, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.send(200).send(data);
+      res.status(200).send(data);
     }
-  });
-});
+
+  })
+
+})
 
 app.get('/api/worker', (req, res) => {
   res.send("Im awake!!");
