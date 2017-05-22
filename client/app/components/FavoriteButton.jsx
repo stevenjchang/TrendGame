@@ -7,31 +7,53 @@ class FavoriteButton extends React.Component {
     this.state = {
       isFavored: false
     }
+    this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
-  toggleFavorite(user) {
+  componentDidMount() {
+    // var that = this;
+    console.log('term ->', this.props.term);
+    
     axios.get('/api/favorite/user', {
       params: {
-        name: this.props.term
+        trend: this.props.term
       }
+    })
+      .then(response => {
+        console.log('***********************');
+        console.log('response.data[0].favorite ->', response.data[0].favorite);
+        console.log('response.data ->', response.data);
+        this.setState({
+          isFavored: response.data[0].favorite
+        })
+      }).catch(function(error) {
+        console.log('Error! inside componentDidMount/FavoriteButton.jsx ->', error);
+      });
+  }
+
+  toggleFavorite() {
+    axios.post('/api/favorite/user', {
+        trend: this.props.term,
+    })
+    .then(response => {
+      this.setState({
+        isFavored: !this.state.isFavored
+      })
+    })
+    .catch(error => {
+      console.log('Error! inside toggleFavorite/FavoriteButton.jsx', error);
     })
   }
 
-  consoleLog() {
-    console.log('checkbox label worked');
-  }
-
   render() {
+    let toggleFavoriteClass = this.state.isFavored ? "favorite-on" : "favorite-off";
     return (
-      <div>
-      
-      <input id="toggle-heart" type="checkbox" onClick={this.consoleLog} />
-      <label for="toggle-heart">❤</label>
-      </div>
+        <span className={"heart2 " + toggleFavoriteClass} onClick={this.toggleFavorite}>❤</span>
     );
   }
 }
 
 export default FavoriteButton;
+
 
 
