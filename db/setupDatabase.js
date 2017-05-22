@@ -72,5 +72,3 @@ db.schema.hasTable('stories').then(function (exists) {
     });
   }
 });
-
-

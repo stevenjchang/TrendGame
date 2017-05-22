@@ -21,4 +21,3 @@ class BoltOnRouter extends React.Component {
 }
 
 render(<BoltOnRouter />, document.getElementById('app'));
-

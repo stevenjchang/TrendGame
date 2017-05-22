@@ -108,4 +108,3 @@ module.exports.addUser = addUser;
 module.exports.getUserSearches = getUserSearches;
 module.exports.postToggleFavorite = postToggleFavorite;
 module.exports.getValueOfFavorite = getValueOfFavorite;
-
